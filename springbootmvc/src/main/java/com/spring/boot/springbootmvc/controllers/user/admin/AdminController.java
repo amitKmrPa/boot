@@ -36,6 +36,18 @@ public class AdminController {
             e.printStackTrace();
             return null;
         }
-
     }  
+
+    @RequestMapping(value = "/addAdmin",method = RequestMethod.POST)
+    public String addAdmin(@ModelAttribute AdminBeans adminBeans){
+        String msg="";
+        try {
+         msg =   adminservice.addAdmin(adminBeans);
+         System.out.println("====00000000000000000000====="+msg);
+         return null;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return null;
+        }
+    }
 }
