@@ -24,14 +24,18 @@ public class AdminController {
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute AdminBeans adminBeans ){
+        AdminEntity admn = null;
         try {
-            adminservice.login(adminBeans);
+            admn=adminservice.login(adminBeans);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("adminData", admn.getUserId());
+            modelAndView.setViewName("admin/home");
+            return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
+            return null;
         }
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
-        return modelAndView;
+
     }  
 }

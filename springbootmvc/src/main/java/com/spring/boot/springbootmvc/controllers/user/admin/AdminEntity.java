@@ -27,4 +27,49 @@ public class AdminEntity {
         // TODO Auto-generated method stub
         return " "+id+" "+userId+" "+userPass+" ";
     }
+
+    
+
+    /**
+     * @return int return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return String return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return String return the userPass
+     */
+    public String getUserPass() {
+        return userPass;
+    }
+
+    /**
+     * @param userPass the userPass to set
+     */
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
+
 }

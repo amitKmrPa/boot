@@ -1,19 +1,35 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
 
 public class AdminBeans {
-    private String userName;
-    private String password;
-    public String getUserName() {
-        return userName;
+    private String userId;
+    private String userPass;
+
+    /**
+     * @return String return the userId
+     */
+    public String getUserId() {
+        return userId;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-    public String getPassword() {
-        return password;
+
+    /**
+     * @return String return the userPass
+     */
+    public String getUserPass() {
+        return userPass;
     }
-    public void setPassword(String password) {
-        this.password = password;
+
+    /**
+     * @param userPass the userPass to set
+     */
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
     }
-    
+
 }
