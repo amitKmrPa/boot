@@ -21,14 +21,11 @@ public class AdminServiceImpl implements AdminServices {
         AdminBeans admn=null;
     String data =null;
         try {
-            // AdminEntity adminEntity = adminRepo.getAdminDetails(adminBeans.getUserId());
-            // System.out.println(adminEntity.toString());
             return adminRepo.getAdminDetails(adminBeans.getUserId());
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
             return null;
-
         }
     }
 
@@ -36,6 +33,7 @@ public class AdminServiceImpl implements AdminServices {
     public String addAdmin(AdminBeans adminBeans) {
         // TODO Auto-generated method stub
         AdminEntity adminEntity=new AdminEntity();
+        String msg = "";
         try {
             adminEntity.setUserName(adminBeans.getUserName());
             adminEntity.setAge(adminBeans.getAge());
@@ -48,12 +46,12 @@ public class AdminServiceImpl implements AdminServices {
             String strDate = dateFormat.format(date);  
             adminBeans.setCreatedAt(strDate);
             adminRepo.saveAndFlush(adminEntity);
-            return null;
+            msg = "Details saved successfuly !";
+            return msg;
         } catch (Exception e) {
             // TODO: handle exception
-            return null;
-        }
-        
-    }
-    
+            msg = " Sorry! Details do not saved.";
+            return msg;
+        }        
+    }    
 }

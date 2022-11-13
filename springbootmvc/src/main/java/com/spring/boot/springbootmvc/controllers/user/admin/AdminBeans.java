@@ -40,9 +40,6 @@ public class AdminBeans {
         this.userPass = userPass;
     }
 
-    
-
-
     /**
      * @return String return the adminType
      */
@@ -128,8 +125,6 @@ public class AdminBeans {
     }
 
     
-
-
     /**
      * @return String return the userName
      */
@@ -143,8 +138,6 @@ public class AdminBeans {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    
 
 
     /**

@@ -1,14 +1,10 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
-
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 @Entity
 @Table(name = "admin_table")
 public class AdminEntity {
@@ -52,8 +48,6 @@ public class AdminEntity {
         // TODO Auto-generated method stub
         return " "+id+" "+userId+" "+userPass+" ";
     }
-
-    
 
     /**
      * @return int return the id
@@ -183,8 +177,6 @@ public class AdminEntity {
     }
 
     
-
-
     /**
      * @return String return the userName
      */
@@ -200,8 +192,6 @@ public class AdminEntity {
     }
 
     
-
-
     /**
      * @return Integer return the age
      */

@@ -39,15 +39,17 @@ public class AdminController {
     }  
 
     @RequestMapping(value = "/addAdmin",method = RequestMethod.POST)
-    public String addAdmin(@ModelAttribute AdminBeans adminBeans){
+    public ModelAndView addAdmin(@ModelAttribute AdminBeans adminBeans){
         String msg="";
+        ModelAndView modelAndView = new ModelAndView();
         try {
          msg =   adminservice.addAdmin(adminBeans);
-         System.out.println("====00000000000000000000====="+msg);
-         return null;
+         modelAndView.addObject("message", msg);
+         modelAndView.setViewName("messages/success");
+         return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
-            return null;
-        }
+            modelAndView.setViewName("messages/failed");
+            return modelAndView;        }
     }
 }
