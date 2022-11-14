@@ -1,14 +1,9 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,13 +38,15 @@ public class AdminController {
         String msg="";
         ModelAndView modelAndView = new ModelAndView();
         try {
-         msg =   adminservice.addAdmin(adminBeans);
+         msg = adminservice.addAdmin(adminBeans);
          modelAndView.addObject("message", msg);
          modelAndView.setViewName("messages/success");
          return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
+            modelAndView.addObject("message", msg);
             modelAndView.setViewName("messages/failed");
-            return modelAndView;        }
+            return modelAndView;        
+        }
     }
 }

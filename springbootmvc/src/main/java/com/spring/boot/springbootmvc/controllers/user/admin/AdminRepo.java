@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Repository
 public interface AdminRepo extends JpaRepository<AdminEntity,Long>{
 
-    //@Query(value = "select * from admin_table  where user_Id =?1", nativeQuery = true)
+//@Query(value = "select * from admin_table  where user_Id =?1", nativeQuery = true)
 @Query("select u from AdminEntity u where userId=:userId")
 AdminEntity getAdminDetails(@Param("userId") String userId);
 }
