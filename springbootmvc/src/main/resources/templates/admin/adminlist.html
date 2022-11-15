@@ -30,9 +30,8 @@
                     <td th:text="${data.userId}">userId</td>
                   <td th:text="${data.userPass}">userPass</td>
                        <td>
-                        <!-- <a th:href="/@{'/edit/' + ${data.id}}">Edit</a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a th:href="/@{'/delete/' + ${data.id}}">Delete</a> -->
+                        <a th:href="@{'/editAdmin/' + ${data.userId}}">Edit</a>
+                        <a th:href="@{'/deleteAdmin/' + ${data.userId}}">Delete</a> 
                     </td> 
                 </tr>
             </tbody>

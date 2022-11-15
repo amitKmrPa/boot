@@ -6,21 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Page</title>
+    <script>
+                    var regEx = /^[0-9a-zA-Z]+$/;
+        function chekUserId(val) {
+            if(!val.match(regEx)){
+                document.getElementById("errId").innerHTML="Enter Only Alphanumeric";
+                document.getElementById("usersId").focus();
+            }else{
+                document.getElementById("errId").innerHTML="";
+            }
+        }
+
+        function chekPass(val) {
+            if(!val.match(regEx)){
+                document.getElementById("errId").innerHTML="Enter Only Alphanumeric";
+                document.getElementById("passId").focus();
+            }else{
+                document.getElementById("errId").innerHTML="";
+            }
+        }
+    </script>
 </head>
 
 <body>
+    <div align="center">
     <div>
-        <h2>Welcome to Spring Project</h2>
+        <h2>Welcome to the Admin Pannel (Spring boot Project)</h2>
     </div>
     <div>
         <form action="/login" method="post" modelAttribute="userDetails">
-        <table>
+        <table border="0px solid black">
             <tr>
                 <th>
-                    User Name
+                    User Id
                 </th>
                 <th>
-                    <input type="text" name="userId"  />
+                    <input type="text" name="userId" id="usersId" placeholder="Enter user id" onblur="chekUserId(this.value)" />
                 </th>                
             </tr>
             <tr>
@@ -28,19 +49,27 @@
                     Password
                 </th>
                 <th>
-                    <input type="password" name="userPass" />
+                    <input type="password" name="userPass" id="passId" placeholder="Enter password" onblur="chekPass(this.value)" />
+
+                </th>
+
+            </tr>
+            <tr>
+
+                <th colspan="2">
+                    <h3 id="errId"></h3>
+
                 </th>
             </tr>
             <tr>
-                <th>                    
-                </th>
-                <th>
+        
+                <th colspan="2">
                     <input type="submit" value="Login"  />
                 </th>
             </tr>
         </table>
     </form>
-
+</div>
 </body>
 
 </html>

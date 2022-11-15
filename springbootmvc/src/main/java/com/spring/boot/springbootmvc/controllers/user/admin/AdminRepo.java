@@ -23,4 +23,10 @@ AdminEntity findUser(@Param("userId") String userId);
 
 @Query("select u from AdminEntity u ")
 List<AdminEntity> getAllUser();
+
+@Query("select u from AdminEntity u where userId=:userId")
+AdminEntity geAdminDetailsById(@Param("userId") String userId);
+
+@Query("select u from AdminEntity u where userId=:userId")
+AdminEntity findUserById(@Param("userId") String userId);
 }

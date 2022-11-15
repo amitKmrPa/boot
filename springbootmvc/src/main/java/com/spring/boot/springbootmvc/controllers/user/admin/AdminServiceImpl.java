@@ -121,4 +121,51 @@ public class AdminServiceImpl implements AdminServices {
         }
         return adminEntity;
     }
+
+    @Override
+    public AdminEntity getUserDetailsById(String userId) {
+        AdminEntity adminEntity = new AdminEntity();
+        try {
+            adminEntity = adminRepo.geAdminDetailsById(userId);
+            return adminEntity;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String updateById(String userId,AdminBeans adminBeans) {
+        AdminEntity adminEntity = new AdminEntity();
+        String msg = "";
+        try {
+            adminEntity  =  adminRepo.findUserById(userId);
+            adminEntity.setUserName(adminBeans.getUserName());
+            adminEntity.setAge(adminBeans.getAge());
+            if (adminEntity.getAdminType().equalsIgnoreCase("super") && !adminBeans.getAdminType().equalsIgnoreCase("super")) {
+                adminEntity.setAdminType(adminBeans.getAdminType());
+            }
+            adminEntity.setAdminSecurity(adminBeans.getAdminSecurity());
+            String password = adminBeans.getUserPass();
+            Base64.Encoder encoder = Base64.getMimeEncoder();  
+            String eStr = encoder.encodeToString(password.getBytes());   // Returns number of bytes written  
+            adminEntity.setUserPass(eStr);
+            Date date = Calendar.getInstance().getTime();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            String strDate = dateFormat.format(date);
+            adminEntity.setLastModifiedAt(strDate);
+            adminEntity.setEmailId(adminBeans.getEmailId());
+            adminEntity.setPhone(adminBeans.getPhone());
+            adminRepo.saveAndFlush(adminEntity);
+            msg = "Details updated successfuly !";
+            return msg;
+        } catch (Exception e) {
+            // TODO: handle exception
+            msg = " Sorry! Details can't be updated.";
+            return msg;
+        }
+    }
+
+   
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,8 +84,13 @@ public class AdminController {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("admin/home");
+                return modelAndView;
+
+            }else{
+                modelAndView.setViewName("messages/loginFailed");
+                return modelAndView;
+
             }
-            return modelAndView;
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -138,13 +144,14 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/updateAdmin", method = RequestMethod.POST)
-    public ModelAndView updateAdmin(@ModelAttribute("updateAtr") AdminBeans adminBeans, HttpSession httpSession) {
+    @RequestMapping(value = "/updateAdmin/{userId}", method = RequestMethod.POST)
+    public ModelAndView updateAdmin(@PathVariable String userId, @ModelAttribute("updateAtr") AdminBeans adminBeans,
+            HttpSession httpSession) {
         String msg = "";
         ModelAndView modelAndView = new ModelAndView();
         try {
-            msg = adminservice.updateAdmin(adminBeans);
-            if (msg.equals("Details saved successfuly !")) {
+            msg = adminservice.updateById(userId,adminBeans);
+            if (msg.equals("Details updated successfuly !")) {
                 modelAndView.addObject("message", msg);
                 modelAndView.setViewName("messages/success");
                 return modelAndView;
@@ -159,6 +166,24 @@ public class AdminController {
             e.printStackTrace();
             modelAndView.addObject("message", msg);
             modelAndView.setViewName("messages/failed");
+            return modelAndView;
+        }
+    }
+
+    @RequestMapping(value = "/editAdmin/{userId}", method = RequestMethod.GET)
+    public ModelAndView editAdmin(@PathVariable String userId, @ModelAttribute("updateAtr") AdminBeans adminBeans,
+            HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        AdminEntity adminEntity = new AdminEntity();
+        try {
+            adminEntity = adminservice.getUserDetailsById(userId);
+            modelAndView.addObject("userData", adminEntity);
+            modelAndView.addObject("userIds", userId);
+            modelAndView.setViewName("admin/updateAdmin");
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
             return modelAndView;
         }
     }

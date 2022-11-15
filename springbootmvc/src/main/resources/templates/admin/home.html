@@ -174,11 +174,11 @@ body {
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
 				<li class="nav-item active"><lable class="nav-link"
 						onclick="add();"> Add </lable></li>
-				<li class="nav-item"><a class="nav-link" onclick="del()">
-						Delete </a></li>
+				<!-- <li class="nav-item"><a class="nav-link" onclick="del()">
+						Delete </a></li> -->
 
-				<li class="nav-item"><a class="nav-link" onclick="upd();">
-						Update </a></li>
+				<!-- <li class="nav-item"><a class="nav-link" onclick="upd();">
+						Update </a></li> -->
 
 				<li class="nav-item"><a class="nav-link" href="http://localhost:8080/getAllUser" onclick="view()">
 						Display </a></li>
@@ -234,79 +234,13 @@ body {
 						</tr>
 					</table>
 					<br>
-													<div align="center"><input type="submit" value="Add" /></div>
-					
-				</form>
-			</div>
-			<div id="upd" align="center">
-				<form action="updateAdmin" method="post" modelAttribute="updateAtr" >
-					<h1 align="center">Add New Admin Account </h1>
-								
-
-		<table>
-			<tr>
-				<td>Full Name:</td>
-				<td><input type="text" name="userName" /></td>
-			</tr>
-			<tr>
-				<td>Age:</td>
-				<td><input type="number" name="age" /></td>
-			</tr>
-			<tr>
-				<td>User Id:</td>
-				<td><input type="text" name="userId" /></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type="password" name="userPass" /></td>
-			</tr>
-			<tr>
-				<td>Admin Type:</td>
-				<td><input type="text" name="adminType" /></td>
-			</tr>
-			<tr>
-				<td>Admin Security:</td>
-				<td><input type="text" name="adminSecurity" /></td>
-			</tr>
-			<tr>
-				<td>Email Id:</td>
-				<td><input type="email" name="emailId" /></td>
-			</tr>
-			<tr>
-				<td>Phone Number:</td>
-				<td><input type="number" name="phone" /></td>
-			</tr>
-		</table>
-		<br>
-										<div align="center"><input type="submit" value="Add" /></div>
-		
-	</form>
-			</div>
-
-			<div id="del" align="center">
-				<form action="delUser" method="post">
-				<h1 align="center">Delete Your Account</h1>
-					<table>
 				
-						<tr>
-							<td>User Id:</td>
-							<td><input type="text" name="userId" /></td>
-						</tr>
-						<tr>
-							<td>Password:</td>
-							<td><input type="password" name="password" /></td>
-						</tr>
-
-					</table>
-										<br>
-													<div align="center"><input type="submit" value="Delete" /></div>
-					
 				</form>
-
-			</div>
-		 
+				</div>
 		</div>
+
 	</main>
+		 
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">

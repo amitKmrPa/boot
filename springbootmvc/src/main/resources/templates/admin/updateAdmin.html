@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="upd" align="center">
+        <form th:action="@{/updateAdmin/} + ${userIds}" method="POST" modelAttribute="updateAtr">
+            <h1 align="center">Add New Admin Account </h1>
+            <table>
+                <tr>
+                    <td>Full Name:</td>
+                    <td><input type="text" name="userName" /></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="number" name="age" /></td>
+                </tr>
+                <tr>
+                    <td>User Id:</td>
+                    <td><input type="text" name="userId" /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="userPass" /></td>
+                </tr>
+                <tr>
+                    <td>Admin Type:</td>
+                    <td><input type="text" name="adminType" /></td>
+                </tr>
+                <tr>
+                    <td>Admin Security:</td>
+                    <td><input type="text" name="adminSecurity" /></td>
+                </tr>
+                <tr>
+                    <td>Email Id:</td>
+                    <td><input type="email" name="emailId" /></td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td><input type="number" name="phone" /></td>
+                </tr>
+                <input type="hidden" th:text="${userId}" />
+            </table>
+            <br>
+            <div align="center"><input type="submit" value="Update" /></div>
+        </form>
+    </div>
+</body>
+
+</html>
