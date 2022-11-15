@@ -11,6 +11,10 @@ public class AdminBeans {
     private String lastModifiedAt;
     private String userName;
     private Integer age;
+    private String emailId;
+    private String phone;
+    private String checkAdminType;
+    private Integer checkPrivalage;
 
     /**
      * @return String return the userId
@@ -153,5 +157,76 @@ public class AdminBeans {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    
+
+
+    /**
+     * @return String return the emailId
+     */
+    public String getEmailId() {
+        return emailId;
+    }
+
+    /**
+     * @param emailId the emailId to set
+     */
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    /**
+     * @return String return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
+
+    /**
+     * @return String return the checkAdminType
+     */
+    public String getCheckAdminType() {
+        return checkAdminType;
+    }
+
+    /**
+     * @param checkAdminType the checkAdminType to set
+     */
+    public void setCheckAdminType(String checkAdminType) {
+        this.checkAdminType = checkAdminType;
+    }
+
+    /**
+     * @return Integer return the checkPrivalage
+     */
+    public Integer getCheckPrivalage() {
+        return checkPrivalage;
+    }
+
+    /**
+     * @param checkPrivalage the checkPrivalage to set
+     */
+    public void setCheckPrivalage(Integer checkPrivalage) {
+        this.checkPrivalage = checkPrivalage;
+    }
+
+    @Override
+    public String toString() {
+        return "AdminBeans [userId=" + userId + ", userPass=" + userPass + ", adminType=" + adminType
+                + ", adminSecurity=" + adminSecurity + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
+                + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt + ", userName=" + userName
+                + ", age=" + age + ", emailId=" + emailId + ", phone=" + phone + ", checkAdminType=" + checkAdminType
+                + ", checkPrivalage=" + checkPrivalage + "]";
+    }
+
+   
 
 }

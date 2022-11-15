@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div align="center" id="view" >
+        <h1>Admin List</h1>
+        <a href="#">Add new admin</a>
+        <br/><br/>
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>age</th>
+                    <th>user id</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${admList}">
+                    <td th:text="${data.id}">ID</td>
+                   <td th:text="${data.userName}">Name</td>
+                     <td th:text="${data.age}">age</td>
+                    <td th:text="${data.userId}">userId</td>
+                  <td th:text="${data.userPass}">userPass</td>
+                       <td>
+                        <!-- <a th:href="/@{'/edit/' + ${data.id}}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a th:href="/@{'/delete/' + ${data.id}}">Delete</a> -->
+                    </td> 
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+</body>
+</html>

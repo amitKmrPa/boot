@@ -131,33 +131,40 @@ body {
 		document.getElementById("view").style.display = "none";
 	}
 	function view() {
-		var data;
-		$.ajax({
-			url : 'http://localhost:8080/AdvanceJavaProject/user',
-			type : 'GET',
-            contentType: "application/json; charset=utf-8",
-			async : false,
-		}).done(function(res) {
-		data = res.data;
-			alert(data);
-		}).fail(function(err) {
-			console.log('Error: ' + err.status);
-		});
+		// var data;
+		// $.ajax({
+		// 	url : 'http://localhost:8080/getAllUser',
+		// 	type : 'POST',
+        //     contentType: "application/json; charset=utf-8",
+		// 	async : false,
+		// }).done(function(res) {
+		// data = res.data;
+		// alert(JSON.stringify(data.AdminEntity));
+		// }).fail(function(err) {
+		// 	console.log('Error: ' + err.status);
+		// });
 
-		document.getElementById("myText").innerHTML = data;
+
+
+		// document.getElementById("myText").innerHTML = data;
 		document.getElementById("view").style.display = "block";
 		document.getElementById("add").style.display = "none";
 		document.getElementById("upd").style.display = "none";
 		document.getElementById("del").style.display = "none";
-
 	}
 </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-		<h3 class="navbar-brand" style="margin-left: 601px;">Admin Panel
+		<h3 class="navbar-brand" style="margin-left: 601px;">Admin Panel 
 			</h3>
 
+			<h6  th:text="${userId}"></h6>
+			<h6  th:text="${userName}"></h6>
+			<form action="destroy" method="post">
+			<button class="navbar-brand" style="margin-right: 601px;">Logout
+			</button>
+		</form>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarCollapse" aria-controls="navbarCollapse"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -173,7 +180,7 @@ body {
 				<li class="nav-item"><a class="nav-link" onclick="upd();">
 						Update </a></li>
 
-				<li class="nav-item"><a class="nav-link" onclick="view()">
+				<li class="nav-item"><a class="nav-link" href="http://localhost:8080/getAllUser" onclick="view()">
 						Display </a></li>
 
 
@@ -188,8 +195,10 @@ body {
 		<div class="container-fluid">
 
 			<div id="add" align="center">
-				<form action="addAdmin" method="post">
-								<h1 align="center">Add New Admin Account</h1>				
+				<form action="addAdmin" method="post" modelAttribute="addAtr" >
+								<h1 align="center">Add New Admin Account </h1>
+											
+
 					<table>
 						<tr>
 							<td>Full Name:</td>
@@ -215,8 +224,14 @@ body {
 							<td>Admin Security:</td>
 							<td><input type="text" name="adminSecurity" /></td>
 						</tr>
-             
-
+						<tr>
+							<td>Email Id:</td>
+							<td><input type="email" name="emailId" /></td>
+						</tr>
+						<tr>
+							<td>Phone Number:</td>
+							<td><input type="number" name="phone" /></td>
+						</tr>
 					</table>
 					<br>
 													<div align="center"><input type="submit" value="Add" /></div>
@@ -224,32 +239,48 @@ body {
 				</form>
 			</div>
 			<div id="upd" align="center">
-				<form action="updUser" method="post">
-								<h1 align="center">Update Your Account</h1>
-				
-					<table>
-						<tr>
-							<td>Full Name:</td>
-							<td><input type="text" name="fullname" /></td>
-						</tr>
-						<tr>
-							<td>Age:</td>
-							<td><input type="number" name="age" /></td>
-						</tr>
-						<tr>
-							<td>User Id:</td>
-							<td><input type="text" name="userId" /></td>
-						</tr>
-						<tr>
-							<td>Password:</td>
-							<td><input type="password" name="password" /></td>
-						</tr>
+				<form action="updateAdmin" method="post" modelAttribute="updateAtr" >
+					<h1 align="center">Add New Admin Account </h1>
+								
 
-					</table>
-										<br>
-													<div align="center"><input type="submit" value="Update" /></div>
-					
-				</form>
+		<table>
+			<tr>
+				<td>Full Name:</td>
+				<td><input type="text" name="userName" /></td>
+			</tr>
+			<tr>
+				<td>Age:</td>
+				<td><input type="number" name="age" /></td>
+			</tr>
+			<tr>
+				<td>User Id:</td>
+				<td><input type="text" name="userId" /></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" name="userPass" /></td>
+			</tr>
+			<tr>
+				<td>Admin Type:</td>
+				<td><input type="text" name="adminType" /></td>
+			</tr>
+			<tr>
+				<td>Admin Security:</td>
+				<td><input type="text" name="adminSecurity" /></td>
+			</tr>
+			<tr>
+				<td>Email Id:</td>
+				<td><input type="email" name="emailId" /></td>
+			</tr>
+			<tr>
+				<td>Phone Number:</td>
+				<td><input type="number" name="phone" /></td>
+			</tr>
+		</table>
+		<br>
+										<div align="center"><input type="submit" value="Add" /></div>
+		
+	</form>
 			</div>
 
 			<div id="del" align="center">
@@ -273,30 +304,13 @@ body {
 				</form>
 
 			</div>
-			<div id="view" align="center">
-							<h1 align="center">View Your Accounts</h1>
-				<table border="3 black solid">
-					<tr>
-						<td>Sl. no</td>
-						<td>Full Name</td>
-						<td>UserId</td>
-						<td>Age</td>
-					</tr>
-
-					<tr>
-						<td><span id="myText"></span></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</div>
+		 
 		</div>
 	</main>
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<h1>Bjs Address : - </h1>
+				<h1> Address : - </h1>
 			</div>
 		</div>
 	</footer>

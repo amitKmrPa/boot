@@ -28,6 +28,12 @@ public class AdminEntity {
     @Column(name = "admin_type")
     private String adminType;
 
+    @Column(name = "email_id")
+    private String emailId;
+
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "admin_security")
     private Integer adminSecurity;
 
@@ -43,11 +49,6 @@ public class AdminEntity {
     @Column(name = "last_modified_at")
     private String lastModifiedAt;
 
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return " "+id+" "+userId+" "+userPass+" ";
-    }
 
     /**
      * @return int return the id
@@ -205,5 +206,44 @@ public class AdminEntity {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+
+    /**
+     * @return String return the emailId
+     */
+    public String getEmailId() {
+        return emailId;
+    }
+
+    /**
+     * @param emailId the emailId to set
+     */
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    /**
+     * @return String return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "AdminEntity [id=" + id + ", userName=" + userName + ", age=" + age + ", userId=" + userId
+                + ", userPass=" + userPass + ", adminType=" + adminType + ", emailId=" + emailId + ", phone=" + phone
+                + ", adminSecurity=" + adminSecurity + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
+                + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt + "]";
+    }
+
+    
 
 }

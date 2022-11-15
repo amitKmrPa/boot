@@ -39,8 +39,16 @@ public class PassBasedEnc {
 
     public static String generateSecurePassword(String password, String salt) {
         String finalval = null;
-        byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-        finalval = Base64.getEncoder().encodeToString(securePassword);
+            byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
+            finalval = Base64.getEncoder().encodeToString(securePassword);
+            return finalval; 
+    }
+
+    public static boolean verifyUserPassword(String providedPassword,
+            String securedPassword, String salt) {
+        boolean finalval = false;
+        String newSecurePassword = generateSecurePassword(providedPassword, salt);
+        finalval = newSecurePassword.equalsIgnoreCase(securedPassword);
         return finalval;
     }
 }
