@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="background-color: rgb(216, 131, 131);">
     <div id="upd" align="center">
         <form th:action="@{/updateAdmin/} + ${userIds}" method="POST" modelAttribute="updateAtr">
             <h1 align="center">Add New Admin Account </h1>
@@ -21,14 +21,7 @@
                     <td>Age:</td>
                     <td><input type="number" name="age" /></td>
                 </tr>
-                <tr>
-                    <td>User Id:</td>
-                    <td><input type="text" name="userId" /></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="userPass" /></td>
-                </tr>
+
                 <tr>
                     <td>Admin Type:</td>
                     <td><input type="text" name="adminType" /></td>

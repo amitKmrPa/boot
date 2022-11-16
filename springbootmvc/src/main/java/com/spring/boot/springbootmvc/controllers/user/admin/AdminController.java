@@ -1,12 +1,9 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
 
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
     @Autowired
     AdminServices adminservice;
-    Boolean iscorrectCredentials = true;
+    private static final Integer role = 7077;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView welcomePage(@ModelAttribute("userDetails") AdminBeans adminBeans,
@@ -45,17 +42,8 @@ public class AdminController {
         }
 
         try {
-            if (!iscorrectCredentials) {
-                modelAndView.addObject("cred", iscorrectCredentials);
-                modelAndView.addObject("message", "Bad credentials");
-                modelAndView.setViewName("index");
-                return modelAndView;
-            } else {
-                iscorrectCredentials = true;
-                modelAndView.addObject("cred", iscorrectCredentials);
-                modelAndView.setViewName("index");
-                return modelAndView;
-            }
+            modelAndView.setViewName("index");
+            return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -73,9 +61,7 @@ public class AdminController {
         try {
             admn = adminservice.login(adminBeans);
             if (admn != null && adminBeans.getUserId().equalsIgnoreCase(admn.getUserId())) {
-                iscorrectCredentials = true;
                 modelAndView.addObject("adminData", admn.getUserId());
-                modelAndView.addObject("cred", iscorrectCredentials);
                 modelAndView.addObject("message", "You are in!");
                 session.setAttribute("userId", admn.getUserId());
                 session.setAttribute("userName", admn.getUserName());
@@ -84,10 +70,13 @@ public class AdminController {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("admin/home");
+
                 return modelAndView;
 
-            }else{
-                modelAndView.setViewName("messages/loginFailed");
+            } 
+            else{
+                modelAndView.addObject("credMsg", "Incorrect userId or password");
+                modelAndView.setViewName("index");
                 return modelAndView;
 
             }
@@ -95,9 +84,8 @@ public class AdminController {
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
-            iscorrectCredentials = false;
-            modelAndView.setViewName("redirect:/");
-            return modelAndView;
+
+            return null;
         }
     }
 
@@ -118,7 +106,7 @@ public class AdminController {
         try {
             adminEntity = adminservice.getUserDetails((String) httpSession.getAttribute("userId"));
             if (adminEntity.getAdminType().equalsIgnoreCase("super")
-                    && adminEntity.getAdminSecurity() == 7077) {
+                    && adminEntity.getAdminSecurity() == role) {
                 msg = adminservice.addAdmin(adminBeans);
                 if (msg.equals("Details saved successfuly !")) {
                     modelAndView.addObject("message", msg);
@@ -150,16 +138,21 @@ public class AdminController {
         String msg = "";
         ModelAndView modelAndView = new ModelAndView();
         try {
-            msg = adminservice.updateById(userId,adminBeans);
+
+            msg = adminservice.updateById(userId, adminBeans);
             if (msg.equals("Details updated successfuly !")) {
                 modelAndView.addObject("message", msg);
                 modelAndView.setViewName("messages/success");
-                return modelAndView;
-            } else {
+            }
+            if (msg.equalsIgnoreCase("Sorry! Details can't be updated.")) {
                 modelAndView.addObject("message", msg);
                 modelAndView.setViewName("messages/failed");
-                return modelAndView;
             }
+            if (msg.equalsIgnoreCase("You are not authorise to update Admin Type.")) {
+                modelAndView.addObject("message", msg);
+                modelAndView.setViewName("messages/failed");
+            }
+            return modelAndView;
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -188,11 +181,33 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/deleteAdmin/{userId}", method = RequestMethod.GET)
+    public ModelAndView deleteAdmin(@PathVariable String userId, HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        String message = "";
+        try {
+            message = adminservice.deleteAdminById(userId);
+            if (message.equalsIgnoreCase("Admin Deleted Successfully !")) {
+                modelAndView.addObject("message", message);
+                modelAndView.setViewName("messages/success");
+                return modelAndView;
+            } else {
+                modelAndView.addObject("message", message);
+                modelAndView.setViewName("messages/failed");
+                return modelAndView;
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return modelAndView;
+        }
+    }
+
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ModelAndView getAllUser() {
         List<AdminEntity> admList = new ArrayList<AdminEntity>();
         ModelAndView modelAndView = new ModelAndView();
-
         try {
             admList = adminservice.getAllUser();
             modelAndView.addObject("admList", admList);
@@ -204,5 +219,60 @@ public class AdminController {
             return null;
 
         }
+    }
+
+    @RequestMapping("/forgotPassword")
+    public ModelAndView getForgotPasswordPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            modelAndView.setViewName("admin/adminForgotPassword");
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @RequestMapping("/forgotPassByUserId")
+    public ModelAndView forgotPassByUserId(@ModelAttribute("forgotPass") AdminBeans adminBeans) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            if (!adminBeans.getUserId().equalsIgnoreCase("")) {
+                modelAndView.addObject("userId", adminBeans.getUserId());
+                modelAndView.setViewName("admin/changePassword");
+            } else {
+                modelAndView.setViewName("redirect:/forgotPassword");
+                return modelAndView;
+            }
+
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @RequestMapping(value = "/generateNewPassword/{userId}", method = RequestMethod.POST)
+    public ModelAndView generateNewPassword(@PathVariable String userId,
+            @ModelAttribute("generatePass") AdminBeans adminBeans) {
+        ModelAndView modelAndView = new ModelAndView();
+        String msg = "";
+        try {
+            if (adminBeans.getUserPass().equalsIgnoreCase(adminBeans.getPassword2())) {
+                msg = adminservice.generateNewPassword(adminBeans, userId);
+                modelAndView.addObject("message", msg);
+                modelAndView.setViewName("messages/success");
+            }
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return modelAndView;
+        }
+
     }
 }

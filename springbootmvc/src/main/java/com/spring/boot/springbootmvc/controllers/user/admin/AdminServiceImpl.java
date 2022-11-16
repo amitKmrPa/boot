@@ -1,5 +1,6 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
 
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,8 +86,12 @@ public class AdminServiceImpl implements AdminServices {
             adminEntity  =  adminRepo.findUser(adminBeans.getUserId());
             adminEntity.setUserName(adminBeans.getUserName());
             adminEntity.setAge(adminBeans.getAge());
-            if (adminEntity.getAdminType().equalsIgnoreCase("super") && !adminBeans.getAdminType().equalsIgnoreCase("super")) {
+            if (adminBeans.getAdminType().equalsIgnoreCase("super")) {
                 adminEntity.setAdminType(adminBeans.getAdminType());
+                adminEntity.setUpdateBy("super");
+            }else{
+                adminEntity.setUpdateBy("sub admin");
+
             }
             adminEntity.setAdminSecurity(adminBeans.getAdminSecurity());
             String password = adminBeans.getUserPass();
@@ -143,14 +148,12 @@ public class AdminServiceImpl implements AdminServices {
             adminEntity  =  adminRepo.findUserById(userId);
             adminEntity.setUserName(adminBeans.getUserName());
             adminEntity.setAge(adminBeans.getAge());
-            if (adminEntity.getAdminType().equalsIgnoreCase("super") && !adminBeans.getAdminType().equalsIgnoreCase("super")) {
+            if (adminBeans.getAdminType().equalsIgnoreCase("super")) {
                 adminEntity.setAdminType(adminBeans.getAdminType());
+                msg = "you are not authorise to update Admin Type.";
+                return msg;
             }
             adminEntity.setAdminSecurity(adminBeans.getAdminSecurity());
-            String password = adminBeans.getUserPass();
-            Base64.Encoder encoder = Base64.getMimeEncoder();  
-            String eStr = encoder.encodeToString(password.getBytes());   // Returns number of bytes written  
-            adminEntity.setUserPass(eStr);
             Date date = Calendar.getInstance().getTime();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             String strDate = dateFormat.format(date);
@@ -166,6 +169,68 @@ public class AdminServiceImpl implements AdminServices {
             return msg;
         }
     }
+
+    @Override
+    public String deleteAdminById(String userId) {
+        // TODO Auto-generated method stub
+        AdminEntity adminEntity = new AdminEntity();
+        String message = "";
+        try {
+            adminEntity = adminRepo.deleteAdminById(userId);
+            adminEntity.setIsDeleted(1);
+            Date date = Calendar.getInstance().getTime();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            String strDate = dateFormat.format(date);
+            adminEntity.setDeletedAt(strDate);
+            message = "Admin Deleted Successfully !";
+            return message;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            message = "Admin Deletetion Failed !";
+            return message;        }
+    }
+
+    // @Override
+    // public AdminEntity getDetailsToChangePass(String userId) {
+    //     AdminEntity adminEntity = new AdminEntity();
+    //     try {
+    //         adminEntity = adminRepo.getAdminDetailsToChangePass(userId);
+    //         return adminEntity;
+    //     } catch (Exception e) {
+    //         // TODO: handle exception
+    //         e.printStackTrace();
+    //         return null;
+    //     }
+    //     // TODO Auto-generated method stub
+    // }
+
+    @Override
+    public String generateNewPassword(AdminBeans adminBeans,String userId) {
+        // TODO Auto-generated method stub
+        AdminEntity adminEntity = new AdminEntity();
+        String msg = "";
+        try {
+            adminEntity =  adminRepo.findAdminUserById(userId);
+            if (adminEntity.getUserId().equalsIgnoreCase(userId)) {
+                String password = adminBeans.getUserPass();
+                Base64.Encoder encoder = Base64.getMimeEncoder();  
+                String eStr = encoder.encodeToString(password.getBytes());   // Returns number of bytes written  
+                adminEntity.setUserPass(eStr);
+                adminRepo.saveAndFlush(adminEntity);
+                msg = "New password generated.";
+            }
+            return msg;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            msg = "New Password generation failed.";
+            return msg;
+
+        }
+    }
+
+    
 
    
 }

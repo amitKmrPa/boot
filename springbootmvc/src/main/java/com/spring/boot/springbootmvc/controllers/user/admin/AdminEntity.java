@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.Builder.Default;
 @Entity
 @Table(name = "admin_table")
 public class AdminEntity {
@@ -37,8 +39,9 @@ public class AdminEntity {
     @Column(name = "admin_security")
     private Integer adminSecurity;
 
+    
     @Column(name = "is_deleted")
-    private String isDeleted;
+    private Integer isDeleted = 0;
 
     @Column(name = "created_at")
     private String createdAt;
@@ -49,6 +52,11 @@ public class AdminEntity {
     @Column(name = "last_modified_at")
     private String lastModifiedAt;
 
+    @Column(name = "deleted_by")
+    private String deleteBy;
+
+    @Column(name = "updated_by")
+    private String updateBy;
 
     /**
      * @return int return the id
@@ -124,14 +132,14 @@ public class AdminEntity {
     /**
      * @return String return the isDeleted
      */
-    public String getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
     /**
      * @param isDeleted the isDeleted to set
      */
-    public void setIsDeleted(String isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -244,6 +252,36 @@ public class AdminEntity {
                 + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt + "]";
     }
 
+
     
+
+
+    /**
+     * @return String return the deleteBy
+     */
+    public String getDeleteBy() {
+        return deleteBy;
+    }
+
+    /**
+     * @param deleteBy the deleteBy to set
+     */
+    public void setDeleteBy(String deleteBy) {
+        this.deleteBy = deleteBy;
+    }
+
+    /**
+     * @return String return the updateBy
+     */
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    /**
+     * @param updateBy the updateBy to set
+     */
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
 }

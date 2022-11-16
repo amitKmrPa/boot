@@ -5,7 +5,7 @@ public class AdminBeans {
     private String userPass;
     private String adminType;
     private Integer adminSecurity;
-    private String isDeleted;
+    private Integer isDeleted;
     private String createdAt;
     private String deletedAt;
     private String lastModifiedAt;
@@ -15,6 +15,9 @@ public class AdminBeans {
     private String phone;
     private String checkAdminType;
     private Integer checkPrivalage;
+    private String password2;
+    private String deleteBy;
+    private String updateBy;
 
     /**
      * @return String return the userId
@@ -75,14 +78,14 @@ public class AdminBeans {
     /**
      * @return String return the isDeleted
      */
-    public String getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
     /**
      * @param isDeleted the isDeleted to set
      */
-    public void setIsDeleted(String isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -228,5 +231,51 @@ public class AdminBeans {
     }
 
    
+
+
+    /**
+     * @return String return the password2
+     */
+    public String getPassword2() {
+        return password2;
+    }
+
+    /**
+     * @param password2 the password2 to set
+     */
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+    
+
+
+    /**
+     * @return String return the deleteBy
+     */
+    public String getDeleteBy() {
+        return deleteBy;
+    }
+
+    /**
+     * @param deleteBy the deleteBy to set
+     */
+    public void setDeleteBy(String deleteBy) {
+        this.deleteBy = deleteBy;
+    }
+
+    /**
+     * @return String return the updateBy
+     */
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    /**
+     * @param updateBy the updateBy to set
+     */
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
 }

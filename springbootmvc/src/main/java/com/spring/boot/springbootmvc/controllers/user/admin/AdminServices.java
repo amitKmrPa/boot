@@ -9,5 +9,8 @@ public AdminEntity getUserDetails(String string);
 public String updateAdmin(AdminBeans adminBeans);
 public List<AdminEntity> getAllUser();
 public AdminEntity getUserDetailsById(String userId);
-public String updateById(String userId, AdminBeans adminBeans); 
+public String updateById(String userId, AdminBeans adminBeans);
+public String deleteAdminById(String userId);
+// public AdminEntity getDetailsToChangePass(String userId);
+public String generateNewPassword(AdminBeans adminBeans,String userId); 
 }
