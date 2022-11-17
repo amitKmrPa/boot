@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div style="width:200px;height:300px ;background-color: rgb(158, 231, 164);">
+    <!-- <div style="width:200px;height:300px ;background-color: rgb(158, 231, 164);">
         TV <br />
         Price 5000<br />
         <br />
@@ -40,6 +40,35 @@
         <br />
         <a th:href="@{'/buy/' + ${data.userId}}">Buy</a> &nbsp;&nbsp;&nbsp;<a
             th:href="@{'/addKart/' + ${data.userId}}">Add to Kart</a>
+    </div> -->
+
+    <div align="center" id="view" >
+        <h1>Product List</h1>
+        <br/><br/>
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Product quantity</th>
+                    <th>Product Id</th>
+                    <th>Buy</th>
+                    <th>Add to kart</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${products}">
+                    <td th:text="${data.id}">ID</td>
+                   <td th:text="${data.productName}">Name</td>
+                     <td th:text="${data.quantity}">quantity</td>
+                    <td th:text="${data.productId}">productId</td>
+                       <td>
+                        <!-- <a th:href="@{'/editAdmin/' + ${data.userId}}">Edit</a>
+                        <a th:href="@{'/deleteAdmin/' + ${data.userId}}">Delete</a>  -->
+                    </td> 
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 

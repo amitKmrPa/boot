@@ -3,6 +3,14 @@ package com.spring.boot.springbootmvc.controllers.user.b2cuser;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductRepo;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductsBeans;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class B2cController {
     @Autowired
     B2cServices b2cServices;
-
+    @Autowired
+    ProductService productService;
     @RequestMapping(value = "/userRegistration", method = RequestMethod.GET)
     public ModelAndView userRegistration() {
         ModelAndView modelAndView = new ModelAndView();
@@ -97,6 +106,8 @@ public class B2cController {
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         ModelAndView modelAndView = new ModelAndView();
+        List<ProductEntity> productEntities=new ArrayList<ProductEntity>();
+
         B2cEntity b2cEntity = null;
         try {
             b2cEntity = b2cServices.userLogin(b2cBeans);
@@ -109,6 +120,10 @@ public class B2cController {
                 String userName = (String) session.getAttribute("user_Name");
                 modelAndView.addObject("user_Name", userName);
                 modelAndView.addObject("user_Id", userId);
+                productEntities =productService.getAllProductDetails();
+                modelAndView.addObject("products", productEntities);
+
+                System.out.println();
                 modelAndView.setViewName("B2cUser/userhome");
 
                 return modelAndView;
