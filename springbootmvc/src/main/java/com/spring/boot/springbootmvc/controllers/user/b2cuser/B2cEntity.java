@@ -1,4 +1,5 @@
-package com.spring.boot.springbootmvc.controllers.user.admin;
+package com.spring.boot.springbootmvc.controllers.user.b2cuser;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "admin_table")
-public class AdminEntity {
+@Table(name = "b2cuser_table")
+public class B2cEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -26,18 +27,14 @@ public class AdminEntity {
     @Column(name = "user_Pass")
     private String userPass;
 
-    @Column(name = "admin_type")
-    private String adminType;
+    @Column(name = "gender")
+    private String gender;
 
     @Column(name = "email_id")
     private String emailId;
 
     @Column(name = "phone")
     private String phone;
-
-    @Column(name = "admin_security")
-    private Integer adminSecurity;
-
     
     @Column(name = "is_deleted")
     private Integer isDeleted = 0;
@@ -57,6 +54,16 @@ public class AdminEntity {
     @Column(name = "updated_by")
     private String updateBy;
 
+    
+
+    @Override
+    public String toString() {
+        return "B2cEntity [id=" + id + ", userName=" + userName + ", age=" + age + ", userId=" + userId + ", userPass="
+                + userPass + ", gender=" + gender + ", emailId=" + emailId + ", phone=" + phone + ", isDeleted="
+                + isDeleted + ", createdAt=" + createdAt + ", deletedAt=" + deletedAt + ", lastModifiedAt="
+                + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + "]";
+    }
+
     /**
      * @return int return the id
      */
@@ -69,6 +76,34 @@ public class AdminEntity {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return String return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * @return Integer return the age
+     */
+    public Integer getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     /**
@@ -99,37 +134,50 @@ public class AdminEntity {
         this.userPass = userPass;
     }
 
-
     /**
-     * @return String return the adminType
+     * @return String return the gender
      */
-    public String getAdminType() {
-        return adminType;
+    public String getGender() {
+        return gender;
     }
 
     /**
-     * @param adminType the adminType to set
+     * @param gender the gender to set
      */
-    public void setAdminType(String adminType) {
-        this.adminType = adminType;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     /**
-     * @return Integer return the adminSecurity
+     * @return String return the emailId
      */
-    public Integer getAdminSecurity() {
-        return adminSecurity;
+    public String getEmailId() {
+        return emailId;
     }
 
     /**
-     * @param adminSecurity the adminSecurity to set
+     * @param emailId the emailId to set
      */
-    public void setAdminSecurity(Integer adminSecurity) {
-        this.adminSecurity = adminSecurity;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     /**
-     * @return String return the isDeleted
+     * @return String return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * @return Integer return the isDeleted
      */
     public Integer getIsDeleted() {
         return isDeleted;
@@ -183,77 +231,6 @@ public class AdminEntity {
     public void setLastModifiedAt(String lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
-
-    
-    /**
-     * @return String return the userName
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    
-    /**
-     * @return Integer return the age
-     */
-    public Integer getAge() {
-        return age;
-    }
-
-    /**
-     * @param age the age to set
-     */
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-
-    /**
-     * @return String return the emailId
-     */
-    public String getEmailId() {
-        return emailId;
-    }
-
-    /**
-     * @param emailId the emailId to set
-     */
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    /**
-     * @return String return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-        return "AdminEntity [id=" + id + ", userName=" + userName + ", age=" + age + ", userId=" + userId
-                + ", userPass=" + userPass + ", adminType=" + adminType + ", emailId=" + emailId + ", phone=" + phone
-                + ", adminSecurity=" + adminSecurity + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
-                + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt + "]";
-    }
-
-
-    
-
 
     /**
      * @return String return the deleteBy

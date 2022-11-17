@@ -27,8 +27,12 @@ public class AdminServiceImpl implements AdminServices {
         try {
              String password = adminBeans.getUserPass();
              Base64.Decoder decoder = Base64.getMimeDecoder();
-             admn = adminRepo.getAdminDetails(adminBeans.getUserId());
-             String dStr = new String(decoder.decode(admn.getUserPass()));  
+             String dStr="";
+             if(!adminBeans.getUserId().equalsIgnoreCase("")){
+                admn = adminRepo.getAdminDetails(adminBeans.getUserId());
+                 dStr = new String(decoder.decode(admn.getUserPass()));  
+
+             }
             if (dStr.equals(password)) {
                 return admn;
             } else {
@@ -54,7 +58,7 @@ public class AdminServiceImpl implements AdminServices {
             adminEntity.setUserId(adminBeans.getUserId());
             String password = adminBeans.getUserPass();
             Base64.Encoder encoder = Base64.getMimeEncoder();  
-            String eStr = encoder.encodeToString(password.getBytes());   // Returns number of bytes written  
+            String eStr = encoder.encodeToString(password.getBytes());     
             adminEntity.setUserPass(eStr);
             Date date = Calendar.getInstance().getTime();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -215,7 +219,7 @@ public class AdminServiceImpl implements AdminServices {
             if (adminEntity.getUserId().equalsIgnoreCase(userId)) {
                 String password = adminBeans.getUserPass();
                 Base64.Encoder encoder = Base64.getMimeEncoder();  
-                String eStr = encoder.encodeToString(password.getBytes());   // Returns number of bytes written  
+                String eStr = encoder.encodeToString(password.getBytes());    
                 adminEntity.setUserPass(eStr);
                 adminRepo.saveAndFlush(adminEntity);
                 msg = "New password generated.";
@@ -225,6 +229,26 @@ public class AdminServiceImpl implements AdminServices {
             // TODO: handle exception
             e.printStackTrace();
             msg = "New Password generation failed.";
+            return msg;
+
+        }
+    }
+
+    @Override
+    public String checkUserId(String userId) {
+        // TODO Auto-generated method stub
+        String msg = "";
+        AdminEntity adminEntity = new AdminEntity();
+        try {
+                adminEntity = adminRepo.checkUserId(userId);
+            if (adminEntity.getUserId().equalsIgnoreCase(userId)) {
+                msg = "This user Id is alredy taken.";
+            }
+            return msg;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            msg = "User Id is available.";
             return msg;
 
         }

@@ -59,7 +59,15 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         AdminEntity admn = null;
         try {
-            admn = adminservice.login(adminBeans);
+            try {
+                admn = adminservice.login(adminBeans);                
+            } catch (Exception e) {
+                // TODO: handle exception
+                    e.printStackTrace();
+                    modelAndView.addObject("credMsg", "Incorrect userId or password");
+                    modelAndView.setViewName("index");
+                    return modelAndView;
+            }
             if (admn != null && adminBeans.getUserId().equalsIgnoreCase(admn.getUserId())) {
                 modelAndView.addObject("adminData", admn.getUserId());
                 modelAndView.addObject("message", "You are in!");
@@ -79,7 +87,7 @@ public class AdminController {
                 modelAndView.setViewName("index");
                 return modelAndView;
 
-            }
+                }
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -274,5 +282,16 @@ public class AdminController {
             return modelAndView;
         }
 
+    }
+
+    @RequestMapping(value="/cheUserId/{userId}", method=RequestMethod.POST)
+    public String checkUserId(@PathVariable String userId) {
+        String msg = "";
+        try {
+            msg = adminservice.checkUserId(userId);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return msg;
     }
 }

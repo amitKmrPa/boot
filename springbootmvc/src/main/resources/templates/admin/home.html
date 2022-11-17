@@ -152,17 +152,36 @@ body {
 		document.getElementById("upd").style.display = "none";
 		document.getElementById("del").style.display = "none";
 	}
+	function cheUserId(params) {
+		if (params) {
+		var data;
+		$.ajax({
+			url : 'http://localhost:8080/cheUserId/'+params,
+			type : 'POST',
+            contentType: "application/json; charset=utf-8",
+			async : false,
+		}).done(function(res) {
+		data = res;
+		}).fail(function(err) {
+			console.log('Error: ' + err.status);
+		});
+
+		if(data)
+		document.getElementById("availId").innerHTML=data;
+		}
+	}
 </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-		<h3 class="navbar-brand" style="margin-left: 601px;">Admin Panel 
+		<h3 class="navbar-brand" style="margin-left: 550px;"><h4 style="color: white;"  th:text="${userName}"></h4> 
+			<!-- <br/><h6 style="color: white;"  th:text="${userId}"></h6> -->
 			</h3>
+			
 
-			<h6  th:text="${userId}"></h6>
-			<h6  th:text="${userName}"></h6>
+			<!-- <h6  th:text="${userId}"></h6> -->
 			<form action="destroy" method="post">
-			<button class="navbar-brand" style="margin-right: 601px;">Logout
+			<button class="navbar-brand" style="margin-left: 300px;color: black;">Logout
 			</button>
 		</form>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -202,31 +221,35 @@ body {
 					<table>
 						<tr>
 							<td>Full Name:</td>
-							<td><input type="text" name="userName" required /></td>
+							<td><input type="text" name="userName" maxlength="100"  required /></td>
 						</tr>
 						<tr>
 							<td>Age:</td>
-							<td><input type="number" name="age" required /></td>
+							<td><input type="number" name="age"   required /></td>
 						</tr>
 						<tr>
 							<td>User Id:</td>
-							<td><input type="text" name="userId" required /></td>
+							<td><input type="text" name="userId" maxlength="15" required onblur="cheUserId(this.value)" /></td>
+						</tr>
+						<tr>
+							
+							<td colspan="2" align="center" style="color:black;"><span id="availId"></span></td>
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="userPass" required /></td>
+							<td><input type="password" name="userPass" maxlength="12" required /></td>
 						</tr>
                         <tr>
 							<td>Admin Type:</td>
-							<td><input type="text" name="adminType" required /></td>
+							<td><input type="text" name="adminType" maxlength="8" required /></td>
 						</tr>
                         <tr>
 							<td>Admin Security:</td>
-							<td><input type="text" name="adminSecurity" required /></td>
+							<td><input type="number" name="adminSecurity"  required /></td>
 						</tr>
 						<tr>
 							<td>Email Id:</td>
-							<td><input type="email" name="emailId" required /></td>
+							<td><input type="email" name="emailId" maxlength="40" required /></td>
 						</tr>
 						<tr>
 							<td>Phone Number:</td>
@@ -234,11 +257,15 @@ body {
 						</tr>
 					</table>
 					<br>
-				
+					<div align="center"><input type="submit" value="Add" /></div>
+
 				</form>
 				</div>
+			
 		</div>
 
+
+		</span>
 	</main>
 		 
 	<footer class="footer">
