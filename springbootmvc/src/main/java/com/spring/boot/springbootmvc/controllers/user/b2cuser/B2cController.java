@@ -1,13 +1,5 @@
 package com.spring.boot.springbootmvc.controllers.user.b2cuser;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
-import com.spring.boot.springbootmvc.controllers.user.products.ProductRepo;
-import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
-import com.spring.boot.springbootmvc.controllers.user.products.ProductsBeans;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
 
 @RestController
 public class B2cController {
@@ -26,6 +23,7 @@ public class B2cController {
     B2cServices b2cServices;
     @Autowired
     ProductService productService;
+
     @RequestMapping(value = "/userRegistration", method = RequestMethod.GET)
     public ModelAndView userRegistration() {
         ModelAndView modelAndView = new ModelAndView();
@@ -47,8 +45,8 @@ public class B2cController {
         String userId;
         String userName;
         try {
-            userId = (String) session.getAttribute("user_Id");
-            userName = (String) session.getAttribute("user_Name");
+            userId = (String) session.getAttribute("userId");
+            userName = (String) session.getAttribute("userName");
             if (userId != null && userName != null) {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
@@ -106,32 +104,28 @@ public class B2cController {
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         ModelAndView modelAndView = new ModelAndView();
-        List<ProductEntity> productEntities=new ArrayList<ProductEntity>();
+        List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
 
         B2cEntity b2cEntity = null;
         try {
             b2cEntity = b2cServices.userLogin(b2cBeans);
             if (b2cEntity != null && b2cBeans.getUserId().equalsIgnoreCase(b2cEntity.getUserId())) {
+                productEntities = productService.getAllProductDetails();
                 modelAndView.addObject("adminData", b2cEntity.getUserId());
                 modelAndView.addObject("message", "You are in!");
-                session.setAttribute("user_Id", b2cEntity.getUserId());
-                session.setAttribute("user_Name", b2cEntity.getUserName());
-                String userId = (String) session.getAttribute("user_Id");
-                String userName = (String) session.getAttribute("user_Name");
-                modelAndView.addObject("user_Name", userName);
-                modelAndView.addObject("user_Id", userId);
-                productEntities =productService.getAllProductDetails();
+                session.setAttribute("userId", b2cEntity.getUserId());
+                session.setAttribute("userName", b2cEntity.getUserName());
+                String userId = (String) session.getAttribute("userId");
+                String userName = (String) session.getAttribute("userName");
+                modelAndView.addObject("userName", userName);
+                modelAndView.addObject("userId", userId);
                 modelAndView.addObject("products", productEntities);
-
-                System.out.println();
+                modelAndView.addObject("userId", session.getAttribute("userId"));
                 modelAndView.setViewName("B2cUser/userhome");
-
                 return modelAndView;
-
             } else {
                 modelAndView.setViewName("B2cUser/B2cUserLogin");
                 return modelAndView;
-
             }
 
         } catch (Exception e) {

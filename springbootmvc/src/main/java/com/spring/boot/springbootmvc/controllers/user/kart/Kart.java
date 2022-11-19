@@ -1,4 +1,4 @@
-package com.spring.boot.springbootmvc.controllers.user.products;
+package com.spring.boot.springbootmvc.controllers.user.kart;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,31 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "products_data")
-public class ProductEntity {
+@Table(name = "kart")
+public class Kart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "product_name")
-    private String productName;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "price")
-    private Integer pric;
 
     @Column(name = "product_Id")
     private String productId;
 
+    @Column(name = "product_count")
+    private String productCount;
+
+    @Column(name = "user_Id")
+    private String userId;
+    
     @Column(name = "seller_Id")
     private String sellerId;
 
-    @Column(name = "product_type")
-    private String productType;
-    
     @Column(name = "is_deleted")
     private Integer isDeleted = 0;
 
@@ -50,6 +44,7 @@ public class ProductEntity {
 
     @Column(name = "updated_by")
     private String updateBy;
+
     
 
     /**
@@ -67,34 +62,6 @@ public class ProductEntity {
     }
 
     /**
-     * @return String return the productName
-     */
-    public String getProductName() {
-        return productName;
-    }
-
-    /**
-     * @param productName the productName to set
-     */
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    /**
-     * @return Integer return the quantity
-     */
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * @param quantity the quantity to set
-     */
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    /**
      * @return String return the productId
      */
     public String getProductId() {
@@ -108,32 +75,20 @@ public class ProductEntity {
         this.productId = productId;
     }
 
+
+
     /**
-     * @return String return the sellerId
+     * @return String return the userId
      */
-    public String getSellerId() {
-        return sellerId;
+    public String getUserId() {
+        return userId;
     }
 
     /**
-     * @param sellerId the sellerId to set
+     * @param userId the userId to set
      */
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    /**
-     * @return String return the productType
-     */
-    public String getProductType() {
-        return productType;
-    }
-
-    /**
-     * @param productType the productType to set
-     */
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
@@ -220,26 +175,46 @@ public class ProductEntity {
         this.updateBy = updateBy;
     }
 
+ 
+    
+
     /**
-     * @return Integer return the pric
+     * @return String return the productCount
      */
-    public Integer getPric() {
-        return pric;
+    public String getProductCount() {
+        return productCount;
     }
 
     /**
-     * @param pric the pric to set
+     * @param productCount the productCount to set
      */
-    public void setPric(Integer pric) {
-        this.pric = pric;
+    public void setProductCount(String productCount) {
+        this.productCount = productCount;
+    }
+
+   
+
+
+    /**
+     * @return String return the sellerId
+     */
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    /**
+     * @param sellerId the sellerId to set
+     */
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
     }
 
     @Override
     public String toString() {
-        return "ProductEntity [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", pric=" + pric
-                + ", productId=" + productId + ", sellerId=" + sellerId + ", productType=" + productType
-                + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt=" + deletedAt
-                + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + "]";
+        return "Kart [id=" + id + ", productId=" + productId + ", productCount=" + productCount + ", userId=" + userId
+                + ", sellerId=" + sellerId + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt="
+                + deletedAt + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy
+                + "]";
     }
 
     

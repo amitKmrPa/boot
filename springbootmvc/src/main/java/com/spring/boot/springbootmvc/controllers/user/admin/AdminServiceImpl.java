@@ -1,6 +1,5 @@
 package com.spring.boot.springbootmvc.controllers.user.admin;
 
-import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,10 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.util.Chars;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.spring.boot.springbootmvc.utilities.PassBasedEnc;
 
 @Service("adminServices")
 public class AdminServiceImpl implements AdminServices {
