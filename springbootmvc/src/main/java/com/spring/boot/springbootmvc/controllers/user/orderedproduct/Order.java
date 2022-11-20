@@ -1,4 +1,4 @@
-package com.spring.boot.springbootmvc.controllers.user.kart;
+package com.spring.boot.springbootmvc.controllers.user.orderedproduct;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,25 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "kart")
-public class Kart {
+@Table(name = "product_orders")
+public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "order_id")
+    private Integer orderId;
 
     @Column(name = "product_Id")
     private String productId;
 
-    @Column(name = "product_count")
-    private String productCount;
-
-    @Column(name = "user_Id")
-    private String userId;
-    
     @Column(name = "seller_Id")
     private String sellerId;
-
+    
     @Column(name = "is_deleted")
     private Integer isDeleted = 0;
 
@@ -45,6 +45,8 @@ public class Kart {
     @Column(name = "updated_by")
     private String updateBy;
 
+    
+
     /**
      * @return int return the id
      */
@@ -59,12 +61,22 @@ public class Kart {
         this.id = id;
     }
 
+
     /**
-     * @return String return the productId
+     * @return Integer return the quantity
      */
-    public String getProductId() {
-        return productId;
+    public Integer getQuantity() {
+        return quantity;
     }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+ 
 
     /**
      * @param productId the productId to set
@@ -73,21 +85,21 @@ public class Kart {
         this.productId = productId;
     }
 
-
-
     /**
-     * @return String return the userId
+     * @return String return the sellerId
      */
-    public String getUserId() {
-        return userId;
+    public String getSellerId() {
+        return sellerId;
     }
 
     /**
-     * @param userId the userId to set
+     * @param sellerId the sellerId to set
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
     }
+
+
 
     /**
      * @return Integer return the isDeleted
@@ -173,47 +185,43 @@ public class Kart {
         this.updateBy = updateBy;
     }
 
- 
-    
-
-    /**
-     * @return String return the productCount
-     */
-    public String getProductCount() {
-        return productCount;
-    }
-
-    /**
-     * @param productCount the productCount to set
-     */
-    public void setProductCount(String productCount) {
-        this.productCount = productCount;
-    }
-
    
 
 
     /**
-     * @return String return the sellerId
+     * @return Integer return the orderId
      */
-    public String getSellerId() {
-        return sellerId;
+    public Integer getOrderId() {
+        return orderId;
     }
 
     /**
-     * @param sellerId the sellerId to set
+     * @param orderId the orderId to set
      */
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+
+
+    
+
+
+    /**
+     * @return String return the productId
+     */
+    public String getProductId() {
+        return productId;
     }
 
     @Override
     public String toString() {
-        return "Kart [id=" + id + ", productId=" + productId + ", productCount=" + productCount + ", userId=" + userId
+        return "Order [id=" + id + ", quantity=" + quantity + ", orderId=" + orderId + ", productId=" + productId
                 + ", sellerId=" + sellerId + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt="
                 + deletedAt + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy
                 + "]";
     }
+    
 
     
 

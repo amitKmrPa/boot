@@ -22,7 +22,7 @@ public class ProductEntity {
     private Integer quantity;
 
     @Column(name = "price")
-    private Integer pric;
+    private Integer price;
 
     @Column(name = "product_Id")
     private String productId;
@@ -220,24 +220,28 @@ public class ProductEntity {
         this.updateBy = updateBy;
     }
 
+
+    
+
+
     /**
-     * @return Integer return the pric
+     * @return Integer return the price
      */
-    public Integer getPric() {
-        return pric;
+    public Integer getPrice() {
+        return price;
     }
 
     /**
-     * @param pric the pric to set
+     * @param price the price to set
      */
-    public void setPric(Integer pric) {
-        this.pric = pric;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "ProductEntity [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", pric=" + pric
-                + ", productId=" + productId + ", sellerId=" + sellerId + ", productType=" + productType
+        return "ProductEntity [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", price="
+                + price + ", productId=" + productId + ", sellerId=" + sellerId + ", productType=" + productType
                 + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt=" + deletedAt
                 + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + "]";
     }

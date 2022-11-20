@@ -42,5 +42,8 @@ public interface AdminRepo extends JpaRepository<AdminEntity, Long> {
     @Query("select u from AdminEntity u where userId=:userId")
     AdminEntity checkUserId(@Param("userId") String userId);
 
+    @Query("select u from AdminEntity u where userId=:userId")
+    AdminEntity getAdminUserId(@Param("userId") String userId);
+
 
 }

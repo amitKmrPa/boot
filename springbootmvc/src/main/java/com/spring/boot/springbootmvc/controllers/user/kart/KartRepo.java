@@ -10,7 +10,10 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface KartRepo extends JpaRepository<Kart , Long>{
-    @Query("select u from Kart u where productId=:productId")
-    List<Kart> addToKart(@Param("productId") String productId);
+    @Query("select u from Kart u where userId=:userId")
+    List<Kart> addToKart(@Param("userId") String userId);
+
+    @Query("select u from Kart u where userId=:userId")
+    List<Kart> viewUserKart(@Param("userId")String userId);
     
 }

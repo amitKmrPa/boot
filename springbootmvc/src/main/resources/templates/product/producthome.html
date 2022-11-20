@@ -16,7 +16,9 @@
 
 
     <div align="center" id="view" >
-        <a href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a>
+        <!-- <a href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a> -->
+        <a th:unless="${userId}" href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a>
+        <a th:if="${userId}" href="/viewUserKart" ><img src="icon/icons8-shopping-cart-16.png" style="block-size: 45px;float:right" /></a>
         <h1>Product List</h1>
         <br/><br/>
         <table border="1" cellpadding="10">

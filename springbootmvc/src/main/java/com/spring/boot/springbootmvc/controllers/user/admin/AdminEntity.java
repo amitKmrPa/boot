@@ -283,4 +283,6 @@ public class AdminEntity {
         this.updateBy = updateBy;
     }
 
+
+
 }

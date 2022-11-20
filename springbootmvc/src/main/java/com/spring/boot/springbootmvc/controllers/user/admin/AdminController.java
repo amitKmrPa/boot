@@ -26,17 +26,20 @@ public class AdminController {
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         ModelAndView modelAndView = new ModelAndView();
+        AdminEntity adminEntity = new AdminEntity();
         String userId;
         String userName;
         try {
             userId = (String) session.getAttribute("userId");
             userName = (String) session.getAttribute("userName");
-            if (userId != null && userName != null) {
+            if (userId != null) {
+            if (userId != null && userName != null && userId.equalsIgnoreCase(adminEntity.getUserId())) {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("admin/home");
                 return modelAndView;
             }
+        }
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -59,36 +62,53 @@ public class AdminController {
         HttpSession session = httpServletRequest.getSession();
         ModelAndView modelAndView = new ModelAndView();
         AdminEntity admn = null;
+        AdminEntity adminEntity = new AdminEntity();
+        String userId;
+        String userName;
+        try {
+            userId = (String) session.getAttribute("userId");
+            userName = (String) session.getAttribute("userName");
+            adminEntity = adminservice.getAdminUserId(userId);
+            if (userId != null && userName != null && userId.equalsIgnoreCase(adminEntity.getUserId())) {
+                modelAndView.addObject("userName", userName);
+                modelAndView.addObject("userId", userId);
+                modelAndView.setViewName("admin/home");
+                return modelAndView;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
         try {
             try {
-                admn = adminservice.login(adminBeans);                
+                admn = adminservice.login(adminBeans);
             } catch (Exception e) {
                 // TODO: handle exception
-                    e.printStackTrace();
-                    modelAndView.addObject("credMsg", "Incorrect userId or password");
-                    modelAndView.setViewName("index");
-                    return modelAndView;
+                e.printStackTrace();
+                modelAndView.addObject("credMsg", "Incorrect userId or password");
+                modelAndView.setViewName("index");
+                return modelAndView;
             }
             if (admn != null && adminBeans.getUserId().equalsIgnoreCase(admn.getUserId())) {
                 modelAndView.addObject("adminData", admn.getUserId());
                 modelAndView.addObject("message", "You are in!");
                 session.setAttribute("userId", admn.getUserId());
                 session.setAttribute("userName", admn.getUserName());
-                String userId = (String) session.getAttribute("userId");
-                String userName = (String) session.getAttribute("userName");
+                userId = (String) session.getAttribute("userId");
+                userName = (String) session.getAttribute("userName");
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("admin/home");
 
                 return modelAndView;
 
-            } 
-            else{
+            } else {
                 modelAndView.addObject("credMsg", "Incorrect userId or password");
                 modelAndView.setViewName("index");
                 return modelAndView;
 
-                }
+            }
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -285,7 +305,7 @@ public class AdminController {
 
     }
 
-    @RequestMapping(value="/cheUserId/{userId}", method=RequestMethod.POST)
+    @RequestMapping(value = "/cheUserId/{userId}", method = RequestMethod.POST)
     public String checkUserId(@PathVariable String userId) {
         String msg = "";
         try {

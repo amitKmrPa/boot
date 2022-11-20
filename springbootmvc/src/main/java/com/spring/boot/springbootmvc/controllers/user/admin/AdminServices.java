@@ -13,5 +13,6 @@ public String updateById(String userId, AdminBeans adminBeans);
 public String deleteAdminById(String userId);
 // public AdminEntity getDetailsToChangePass(String userId);
 public String generateNewPassword(AdminBeans adminBeans,String userId);
-public String checkUserId(String userId); 
+public String checkUserId(String userId);
+public AdminEntity getAdminUserId(String userId); 
 }

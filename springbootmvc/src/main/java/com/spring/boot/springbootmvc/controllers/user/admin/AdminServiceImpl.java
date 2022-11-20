@@ -251,6 +251,18 @@ public class AdminServiceImpl implements AdminServices {
         }
     }
 
+    @Override
+    public AdminEntity getAdminUserId(String userId) {
+        // TODO Auto-generated method stub
+        AdminEntity adminEntity = new AdminEntity();
+        try {
+            adminEntity = adminRepo.getAdminUserId(userId);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return adminEntity;
+    }
+
     
 
    

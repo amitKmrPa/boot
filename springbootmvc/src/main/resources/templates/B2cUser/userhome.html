@@ -16,7 +16,8 @@
 
 
     <div align="center" id="view" >
-        <a href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a>
+        <a th:unless="${userId}" href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a>
+        <a th:if="${userId}" href="/viewUserKart" ><img src="icon/icons8-shopping-cart.gif" style="block-size: 45px;float:right" /></a>
         <h1>Product List</h1>
         <br/><br/>
         <table border="1" cellpadding="10">
@@ -27,6 +28,7 @@
                     <th>Quantity</th>
                     <th>Product Type</th>
                     <th>Product Id</th>
+                    <th>Product Price</th>
                     <th>Buy</th>
                     <th>Add to kart</th>
                 </tr>
@@ -37,9 +39,10 @@
                    <td th:text="${data.productName}"></td>
                      <td th:text="${data.quantity}"></td>
                      <td th:text="${data.productType}"></td>
-                    <td th:text="${data.productId}"></td>
-                       <td>
-                        <a th:href="@{'/editAdmin/' + ${data.productId}}">Edit</a></td>
+                     <td th:text="${data.productId}"></td>
+                     <td th:text="${data.price}"></td>
+                     <td>
+                        <a th:href="@{'/buyNow/' + ${data.productId} +'/'+ ${userId}+'/'+${data.sellerId}}">Buy Now</a></td>
                     <td>
                             <a th:href="@{'/addToKart/' + ${data.productId} +'/'+ ${userId}+'/'+${data.sellerId}}">Add</a>  
                     </td> 

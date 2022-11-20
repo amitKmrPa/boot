@@ -41,12 +41,24 @@ ProductRepo productRepo;
             kartEntities.setCreatedAt(strDate);
             kartVal = kartRepo.saveAndFlush(kartEntities);
             // TimeUnit.SECONDS.sleep(1);
-            kart=kartRepo.addToKart(productId);
+            kart=kartRepo.addToKart(userId);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
         return kart;
+    }
+
+    @Override
+    public List<Kart> viewUserKart(String userId) {
+        // TODO Auto-generated method stub
+        List<Kart> karts = new ArrayList<>();
+        try {
+            karts = kartRepo.viewUserKart(userId);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return karts;
     }
     
 }

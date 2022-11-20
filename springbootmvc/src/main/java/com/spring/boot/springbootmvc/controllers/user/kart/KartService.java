@@ -5,5 +5,7 @@ import java.util.List;
 public interface KartService {
 
     List<Kart> addToKart(String productId,String userId,String sellerId);
+
+    List<Kart> viewUserKart(String userId);
     
 }

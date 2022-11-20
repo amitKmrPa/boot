@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.boot.springbootmvc.controllers.user.orderedproduct.Order;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class B2cController {
@@ -50,7 +53,7 @@ public class B2cController {
             if (userId != null && userName != null) {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
-                modelAndView.setViewName("B2cUser/userhome");
+                modelAndView.setViewName("B2cUser/B2cUserLogin");
                 return modelAndView;
             }
 
@@ -135,5 +138,18 @@ public class B2cController {
             return modelAndView;
         }
     }
-
+    @RequestMapping(value="/buyNow/{productId}/{userId}/{sellerId}", method=RequestMethod.GET)
+    public ModelAndView buyNow(@PathVariable String productId,@PathVariable String userId,@PathVariable String sellerId) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("==========================");
+        System.out.println(productId+" "+userId+" "+sellerId);
+        List<Order> orders =new ArrayList<>();
+        try {
+            orders = productService.buyNow(productId,userId,sellerId);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return modelAndView;
+    }
+    
 }
