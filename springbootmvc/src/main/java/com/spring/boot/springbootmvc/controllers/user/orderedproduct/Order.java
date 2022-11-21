@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "product_orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -19,7 +19,10 @@ public class Order {
     private Integer quantity;
 
     @Column(name = "order_id")
-    private Integer orderId;
+    private String orderId;
+
+    @Column(name = "user_Id")
+    private String userId;
 
     @Column(name = "product_Id")
     private String productId;
@@ -188,20 +191,7 @@ public class Order {
    
 
 
-    /**
-     * @return Integer return the orderId
-     */
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    /**
-     * @param orderId the orderId to set
-     */
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
+   
 
 
     
@@ -214,14 +204,47 @@ public class Order {
         return productId;
     }
 
+   
+    
+
+    
+
+
+    /**
+     * @return String return the orderId
+     */
+    public String getOrderId() {
+        return orderId;
+    }
+
+    /**
+     * @param orderId the orderId to set
+     */
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    /**
+     * @return String return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
-        return "Order [id=" + id + ", quantity=" + quantity + ", orderId=" + orderId + ", productId=" + productId
-                + ", sellerId=" + sellerId + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt="
-                + deletedAt + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy
-                + "]";
+        return "Order [id=" + id + ", quantity=" + quantity + ", orderId=" + orderId + ", userId=" + userId
+                + ", productId=" + productId + ", sellerId=" + sellerId + ", isDeleted=" + isDeleted + ", createdAt="
+                + createdAt + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy="
+                + deleteBy + ", updateBy=" + updateBy + "]";
     }
-    
 
     
 

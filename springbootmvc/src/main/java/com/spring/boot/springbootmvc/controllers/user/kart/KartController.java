@@ -21,12 +21,9 @@ public class KartController {
         List<Kart> kart = new ArrayList<>();
         String userId = (String)httpSession.getAttribute("userId");
         try {
-            System.out.println("===============================");
-            System.out.println(userId);
             kart =  kartService.viewUserKart(userId);
             modelAndView.addObject("kart", kart);
             modelAndView.setViewName("kart/userkart");
-            System.out.println(kart.toString());
         } catch (Exception e) {
             // TODO: handle exception
         }

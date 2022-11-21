@@ -141,13 +141,17 @@ public class B2cController {
     @RequestMapping(value="/buyNow/{productId}/{userId}/{sellerId}", method=RequestMethod.GET)
     public ModelAndView buyNow(@PathVariable String productId,@PathVariable String userId,@PathVariable String sellerId) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("==========================");
-        System.out.println(productId+" "+userId+" "+sellerId);
         List<Order> orders =new ArrayList<>();
         try {
             orders = productService.buyNow(productId,userId,sellerId);
+            System.out.println("=================================");
+            System.out.println(orders.toString());
+            modelAndView.addObject("orders", orders);
+            modelAndView.setViewName("buynowpreview/buynow");
+            return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
         return modelAndView;
     }
