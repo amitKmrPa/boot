@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.boot.springbootmvc.controllers.user.orderedproduct.Order;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -141,11 +139,9 @@ public class B2cController {
     @RequestMapping(value="/buyNow/{productId}/{userId}/{sellerId}", method=RequestMethod.GET)
     public ModelAndView buyNow(@PathVariable String productId,@PathVariable String userId,@PathVariable String sellerId) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Order> orders =new ArrayList<>();
+        List<Object> orders =new ArrayList<>();
         try {
             orders = productService.buyNow(productId,userId,sellerId);
-            System.out.println("=================================");
-            System.out.println(orders.toString());
             modelAndView.addObject("orders", orders);
             modelAndView.setViewName("buynowpreview/buynow");
             return modelAndView;

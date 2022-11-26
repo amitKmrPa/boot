@@ -8,6 +8,6 @@ public interface ProductService {
 
     List<ProductEntity> getAllProductDetails();
 
-    List<Order> buyNow(String productId, String userId, String sellerId);
+    List<Object> buyNow(String productId, String userId, String sellerId);
     
 }

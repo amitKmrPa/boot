@@ -18,8 +18,8 @@ public class Kart {
     @Column(name = "product_Id")
     private String productId;
 
-    @Column(name = "product_count")
-    private String productCount;
+    @Column(name = "product_count",columnDefinition = "Integer default 0")
+    private Integer productCount;
 
     @Column(name = "user_Id")
     private String userId;
@@ -173,23 +173,6 @@ public class Kart {
         this.updateBy = updateBy;
     }
 
- 
-    
-
-    /**
-     * @return String return the productCount
-     */
-    public String getProductCount() {
-        return productCount;
-    }
-
-    /**
-     * @param productCount the productCount to set
-     */
-    public void setProductCount(String productCount) {
-        this.productCount = productCount;
-    }
-
    
 
 
@@ -205,6 +188,25 @@ public class Kart {
      */
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
+    }
+
+
+
+    
+
+
+    /**
+     * @return Integer return the productCount
+     */
+    public Integer getProductCount() {
+        return productCount;
+    }
+
+    /**
+     * @param productCount the productCount to set
+     */
+    public void setProductCount(Integer productCount) {
+        this.productCount = productCount;
     }
 
     @Override

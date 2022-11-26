@@ -16,5 +16,10 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("select u from ProductEntity u where productId=:productId and sellerId=:sellerId")
     ProductEntity getProductForUser(@Param("productId") String productId,@Param("sellerId") String sellerId);
 
+    @Query(value="select u.product_count,v.product_name,v.price,v.product_Id,v.product_type from kart u inner join products_data v on u.user_Id=v.user_Id where u.user_Id=?1",nativeQuery = true)
+    List<Object> buyNow(@Param("userId") String userId);
+
+    // List<Kart> addToKart(String userId);
+
     
 }

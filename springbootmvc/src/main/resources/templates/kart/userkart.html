@@ -16,36 +16,45 @@
 
 
     <div align="center" id="view" >
-        <h1>Product List</h1>
+        <h1>Product List </h1>
         <br/><br/>
         <table border="1" cellpadding="10">
             <thead>
                 <tr>
                     <th>Sl. No.</th>
                     <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Product Type</th>
+                    <th>Price</th>
                     <th>Product Id</th>
+                    <th>Product Type</th>
+                    <th>Product Quantity</th>
                     <th>Buy</th>
                     <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="data : ${kart}">
-                    <td th:text="${data.id}"></td>
+                <input type="hidden"  />
+                <tr th:each="data, num : ${product}"  >
+                    <td th:utext="${num.count}"></td>
+                    <td th:text="${data[1]}"></td>
+                    <td th:text="${data[2]}"></td>
+                    <td th:text="${data[3]}"></td>
+                    <td th:text="${data[4]}"></td>
+                    <td th:text="${data[0]}"></td>
+                    <!-- <td th:text="${data.id}"></td>
+                    <td th:text="${data.productName}"></td>
                     <td th:text="${data.productId}"></td>
                     <td th:text="${data.userId}"></td>
                     <td th:text="${data.sellerId}"></td>
-                    <td th:text="${data.createdAt}"></td>
+                    <td th:text="${data.createdAt}"></td> -->
                    <!-- <td th:text="${data.productName}"></td>
                      <td th:text="${data.quantity}"></td>
                      <td th:text="${data.productType}"></td>
                     <td th:text="${data.productId}"></td> -->
-                       <!-- <td>
-                        <a th:href="@{'/buyNow/' + ${data.productId}}">Buy Now </a></td>
+                        <td>
+                        <a th:href="@{'/buyNow/' + ${data[3]}}">Buy Now </a></td>
                     <td>
-                            <a th:href="@{'/removeFromKart/' + ${data.productId}+'/'+${data.sellerId}}">Remove</a>  
-                    </td>  -->
+                            <a th:href="@{'/removeFromKart/' + ${data[3]}+'/'+${data[5]}}">Remove</a>  
+                    </td> 
                 </tr>
             </tbody>
         </table>

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.boot.springbootmvc.controllers.user.b2cuser.B2cServices;
-import com.spring.boot.springbootmvc.controllers.user.kart.Kart;
-import com.spring.boot.springbootmvc.controllers.user.kart.KartRepo;
 import com.spring.boot.springbootmvc.controllers.user.kart.KartService;
 
 @RestController
@@ -43,14 +40,15 @@ public class ProductController {
     @RequestMapping(value = "/addToKart/{productId}/{userId}/{sellerId}")
     public ModelAndView addToKart(@PathVariable String productId,@PathVariable String userId,@PathVariable String sellerId,HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
-        List<Kart> kart = new ArrayList<>();
+        List<Object> product = new ArrayList<>();
         try {
-            kart = kartrService.addToKart(productId,userId,sellerId);
-            modelAndView.addObject("kart", kart);           
+            product = kartrService.addToKart(productId,userId,sellerId);
+            modelAndView.addObject("product", product);           
             modelAndView.setViewName("kart/userkart");
             return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
             return null;
         }
     }

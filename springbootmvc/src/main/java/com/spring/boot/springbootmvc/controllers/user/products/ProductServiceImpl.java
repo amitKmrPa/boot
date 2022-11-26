@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.standard.expression.OrExpression;
-
 import com.spring.boot.springbootmvc.controllers.user.orderedproduct.Order;
 import com.spring.boot.springbootmvc.controllers.user.orderedproduct.OrdersRepo;
 
@@ -24,14 +22,15 @@ public class ProductServiceImpl implements ProductService {
             productEntities = productRepo.getAllProductDetails();
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
         return productEntities;
     }
     @Override
-    public List<Order> buyNow(String productId, String userId, String sellerId) {
+    public List<Object> buyNow(String productId, String userId, String sellerId) {
         // TODO Auto-generated method stub
         Order orders=new Order();
-        List<Order> listOrder = new ArrayList<>();
+        List<Object> listOrder = new ArrayList<>();
         ProductEntity productEntities = new ProductEntity();
         try {
             productEntities = productRepo.getProductForUser(productId,sellerId);
@@ -40,7 +39,8 @@ public class ProductServiceImpl implements ProductService {
             orders.setSellerId(productEntities.getSellerId());
             orders.setUserId(userId);
             ordersRepo.saveAndFlush(orders);
-            listOrder = ordersRepo.buyNow(userId);
+            listOrder = ordersRepo.buyNow(productId);
+            System.out.println(listOrder);
             return listOrder;
         } catch (Exception e) {
             // TODO: handle exception

@@ -23,20 +23,20 @@
                 <tr>
                     <th>Sl. No.</th>
                     <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Product Type</th>
+                    <th>Price</th>
                     <th>Product Id</th>
+                    <th>Product Type</th>
                     <th>Buy</th>
                     <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="data : ${orders}">
-                    <td th:text="${data.id}"></td>
-                    <td th:text="${data.productId}"></td>
-                    <td th:text="${data.userId}"></td>
-                    <td th:text="${data.sellerId}"></td>
-                    <td th:text="${data.createdAt}"></td>
+                <tr th:each="data,num : ${orders}">
+                    <td th:utext="${num.count}"></td>
+                    <td th:text="${data[1]}"></td>
+                    <td th:text="${data[2]}"></td>
+                    <td th:text="${data[3]}"></td>
+                    <td th:text="${data[4]}"></td>
                    <!-- <td th:text="${data.productName}"></td>
                      <td th:text="${data.quantity}"></td>
                      <td th:text="${data.productType}"></td>

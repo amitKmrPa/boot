@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface OrdersRepo extends JpaRepository<Order , Integer>  {
 
-    @Query("select u from Order u where  userId=:userId")
-    List<Order> buyNow(@Param("userId") String userId);
+    @Query(value="select u.quantity,v.product_name,v.price,v.product_Id,v.product_type from product_orders u inner join products_data v on u.product_Id=v.product_Id where u.product_Id=?1",nativeQuery = true)
+    List<Object> buyNow(@Param("productId") String productId);
     
 }
