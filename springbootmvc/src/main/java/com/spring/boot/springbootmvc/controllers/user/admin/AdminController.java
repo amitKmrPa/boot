@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ public class AdminController {
     AdminServices adminservice;
     private static final Integer role = 7077;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView welcomePage(@ModelAttribute("userDetails") AdminBeans adminBeans,
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
@@ -92,7 +91,7 @@ public class AdminController {
             }
             if (admn != null && adminBeans.getUserId().equalsIgnoreCase(admn.getUserId())) {
                 modelAndView.addObject("adminData", admn.getUserId());
-                modelAndView.addObject("message", "You are in!");
+                modelAndView.addObject("message", "You Are In!");
                 session.setAttribute("userId", admn.getUserId());
                 session.setAttribute("userName", admn.getUserName());
                 userId = (String) session.getAttribute("userId");
@@ -118,12 +117,12 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/destroy")
+    @RequestMapping("/destroy")
     public ModelAndView destroySession(HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         httpSession.removeAttribute("userId");
         httpSession.removeAttribute("userName");
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 

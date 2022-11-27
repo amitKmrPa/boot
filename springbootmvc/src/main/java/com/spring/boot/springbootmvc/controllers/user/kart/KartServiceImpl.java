@@ -32,8 +32,8 @@ public class KartServiceImpl implements KartService {
             int product_count = 1;
             if (kartEntities != null) {
                 if (kartEntities.getProductId() != null && kartEntities.getProductId().equalsIgnoreCase(productId)) {
-                    product_count = kartEntities.getProductCount();
-                    kartEntities.setProductCount(kartEntities.getProductCount()+product_count);
+                    int count = kartEntities.getProductCount()+product_count;
+                    kartEntities.setProductCount(count);
                     Date date = Calendar.getInstance().getTime();
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm hh:mm:ss");
                     String strDate = dateFormat.format(date);
@@ -60,9 +60,9 @@ public class KartServiceImpl implements KartService {
     }
 
     @Override
-    public List<Kart> viewUserKart(String userId) {
+    public List<Object> viewUserKart(String userId) {
         // TODO Auto-generated method stub
-        List<Kart> karts = new ArrayList<>();
+        List<Object> karts = new ArrayList<>();
         try {
             karts = kartRepo.viewUserKart(userId);
         } catch (Exception e) {
@@ -73,19 +73,22 @@ public class KartServiceImpl implements KartService {
     }
 
     @Override
-    public String removeFromKart(String productId, String sellerId, String userId) {
+    public List<Object> removeFromKart(String productId, String sellerId, String userId) {
         // TODO Auto-generated method stub
         Kart kart = new Kart();
+        int product_count = 1;
         Kart kartData = new Kart();
+        List<Object> listKart = new ArrayList<>();
         try {
             kart = kartRepo.removeFromKart(productId, sellerId, userId);
-            kartData.setIsDeleted(1);
-            kartRepo.saveAndFlush(kartData);
+            kart.setProductCount(kart.getProductCount()-product_count);
+            kartRepo.saveAndFlush(kart);
+            listKart = kartRepo.kartList(userId);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
-        return null;
+        return listKart;
     }
 
 }

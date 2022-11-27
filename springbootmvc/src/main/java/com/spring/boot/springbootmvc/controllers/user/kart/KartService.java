@@ -8,8 +8,8 @@ public interface KartService {
 
     List<Object> addToKart(String productId,String userId,String sellerId);
 
-    List<Kart> viewUserKart(String userId);
+    List<Object> viewUserKart(String userId);
 
-    String removeFromKart(String productId, String sellerId, String userId);
+    List<Object> removeFromKart(String productId, String sellerId, String userId);
     
 }

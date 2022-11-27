@@ -2,6 +2,8 @@ package com.spring.boot.springbootmvc.controllers.user.products;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +36,15 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity productEntities = new ProductEntity();
         try {
             productEntities = productRepo.getProductForUser(productId,sellerId);
-            orders.setOrderId("1");
+            UUID uuid = UUID.randomUUID();
+            String uuidAsString = uuid.toString();    
+            System.out.println("Your UUID is: " + uuidAsString);
+            orders.setOrderId(uuidAsString);
             orders.setProductId(productEntities.getProductId());
             orders.setSellerId(productEntities.getSellerId());
             orders.setUserId(userId);
             ordersRepo.saveAndFlush(orders);
-            listOrder = ordersRepo.buyNow(productId);
+            listOrder = ordersRepo.buyNow(uuidAsString);
             System.out.println(listOrder);
             return listOrder;
         } catch (Exception e) {

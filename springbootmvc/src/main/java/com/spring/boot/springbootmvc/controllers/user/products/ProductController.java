@@ -42,9 +42,13 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         List<Object> product = new ArrayList<>();
         try {
-            product = kartrService.addToKart(productId,userId,sellerId);
-            modelAndView.addObject("product", product);           
-            modelAndView.setViewName("kart/userkart");
+            if (!userId.equalsIgnoreCase("null")) {                
+                product = kartrService.addToKart(productId,userId,sellerId);
+                modelAndView.addObject("product", product);           
+                modelAndView.setViewName("kart/userkart");
+            }else{
+                modelAndView.setViewName("redirect:/");
+            }
             return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception

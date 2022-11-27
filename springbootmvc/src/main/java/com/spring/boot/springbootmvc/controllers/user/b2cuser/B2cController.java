@@ -113,7 +113,7 @@ public class B2cController {
             if (b2cEntity != null && b2cBeans.getUserId().equalsIgnoreCase(b2cEntity.getUserId())) {
                 productEntities = productService.getAllProductDetails();
                 modelAndView.addObject("adminData", b2cEntity.getUserId());
-                modelAndView.addObject("message", "You are in!");
+                modelAndView.addObject("message", "You Are In!");
                 session.setAttribute("userId", b2cEntity.getUserId());
                 session.setAttribute("userName", b2cEntity.getUserName());
                 String userId = (String) session.getAttribute("userId");
@@ -141,9 +141,14 @@ public class B2cController {
         ModelAndView modelAndView = new ModelAndView();
         List<Object> orders =new ArrayList<>();
         try {
-            orders = productService.buyNow(productId,userId,sellerId);
-            modelAndView.addObject("orders", orders);
-            modelAndView.setViewName("buynowpreview/buynow");
+            if (!userId.equalsIgnoreCase("null")) {                
+                orders = productService.buyNow(productId,userId,sellerId);
+                modelAndView.addObject("orders", orders);
+                modelAndView.setViewName("buynowpreview/buynow");
+            } else {
+                modelAndView.setViewName("redirect:/");
+
+            }
             return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception

@@ -12,14 +12,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
+<body style="background-color: rgb(216, 131, 131);">
 
 
     <div align="center" id="view" >
         <a th:unless="${userId}" href="/userLoginPage" ><img src="icon/login-button-png-18030.png" style="block-size: 45px;float:right" /></a>
+        <a th:unless="${userId}" href="/userRegistration" ><img src="icon/download.png" style="block-size: 80px;float:right" /></a>
+        <a th:if="${userId}" href="/destroy" ><img src="icon/images.jpg" style="block-size: 70px;float:right" /></a>
         <a th:if="${userId}" href="/viewUserKart" ><img src="icon/icons8-shopping-cart.gif" style="block-size: 45px;float:right" /></a>
         <h1>Product List</h1>
         <br/><br/>
+        <h1 th:text="${message}" ></h1>
         <table border="1" cellpadding="10">
             <thead>
                 <tr>
@@ -29,7 +32,7 @@
                     <th>Product Type</th>
                     <th>Product Id</th>
                     <th>Product Price</th>
-                    <th>Buy</th>
+                    <th>Place Order</th>
                     <th>Add to kart</th>
                 </tr>
             </thead>
@@ -49,6 +52,7 @@
                 </tr>
             </tbody>
         </table>
+
     </div>
 </body>
 

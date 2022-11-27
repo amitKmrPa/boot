@@ -19,11 +19,12 @@ public class KartController {
     @RequestMapping(value="/viewUserKart",method = RequestMethod.GET)
     public ModelAndView viewUserKart(HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
-        List<Kart> kart = new ArrayList<>();
+        List<Object> kart = new ArrayList<>();
         String userId = (String)httpSession.getAttribute("userId");
+        String userName = (String)httpSession.getAttribute("userName");
         try {
             kart =  kartService.viewUserKart(userId);
-            modelAndView.addObject("kart", kart);
+            modelAndView.addObject("product", kart);
             modelAndView.setViewName("kart/userkart");
         } catch (Exception e) {
             // TODO: handle exception
@@ -33,9 +34,12 @@ public class KartController {
     @RequestMapping(value="/removeFromKart/{productId}/{sellerId}")
     public ModelAndView removeFromKart(@PathVariable("productId") String productId,@PathVariable("sellerId") String sellerId, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
+        List<Object> listKart = new ArrayList<>();
         String msg = "";
         try {
-            msg = kartService.removeFromKart(productId,sellerId,(String)httpSession.getAttribute("userId"));
+            listKart = kartService.removeFromKart(productId,sellerId,(String)httpSession.getAttribute("userId"));
+            modelAndView.addObject("product", listKart);
+            modelAndView.setViewName("kart/userkart");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

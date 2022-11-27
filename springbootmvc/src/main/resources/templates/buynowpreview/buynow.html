@@ -16,7 +16,7 @@
 
 
     <div align="center" id="view" >
-        <h1>Product List</h1>
+        <h1>Buy it and Make Payment</h1>
         <br/><br/>
         <table border="1" cellpadding="10">
             <thead>
@@ -26,8 +26,9 @@
                     <th>Price</th>
                     <th>Product Id</th>
                     <th>Product Type</th>
-                    <th>Buy</th>
-                    <th>Remove</th>
+                    <th>Order Id</th>
+                    <th>Make Payment</th>
+                    <th>Cancel Order</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,15 +38,13 @@
                     <td th:text="${data[2]}"></td>
                     <td th:text="${data[3]}"></td>
                     <td th:text="${data[4]}"></td>
-                   <!-- <td th:text="${data.productName}"></td>
-                     <td th:text="${data.quantity}"></td>
-                     <td th:text="${data.productType}"></td>
-                    <td th:text="${data.productId}"></td> -->
-                       <!-- <td>
-                        <a th:href="@{'/buyNow/' + ${data.productId}}">Buy Now </a></td>
+                    <td th:text="${data[5]}"></td>
                     <td>
-                            <a th:href="@{'/removeFromKart/' + ${data.productId}+'/'+${data.sellerId}}">Remove</a>  
-                    </td>  -->
+                        <a th:href="@{'/payment/' + ${data[5]}}">Make Payment </a></td>
+                        <td>
+                            <a th:href="@{'/removeFromKart/' + ${data[3]}+'/'+${data[5]}}">Cancel Order</a>  
+                    </td>
+
                 </tr>
             </tbody>
         </table>

@@ -16,7 +16,7 @@
 
 
     <div align="center" id="view" >
-        <h1>Product List </h1>
+        <h1>Your Kart </h1>
         <br/><br/>
         <table border="1" cellpadding="10">
             <thead>
@@ -40,16 +40,7 @@
                     <td th:text="${data[3]}"></td>
                     <td th:text="${data[4]}"></td>
                     <td th:text="${data[0]}"></td>
-                    <!-- <td th:text="${data.id}"></td>
-                    <td th:text="${data.productName}"></td>
-                    <td th:text="${data.productId}"></td>
-                    <td th:text="${data.userId}"></td>
-                    <td th:text="${data.sellerId}"></td>
-                    <td th:text="${data.createdAt}"></td> -->
-                   <!-- <td th:text="${data.productName}"></td>
-                     <td th:text="${data.quantity}"></td>
-                     <td th:text="${data.productType}"></td>
-                    <td th:text="${data.productId}"></td> -->
+
                         <td>
                         <a th:href="@{'/buyNow/' + ${data[3]}}">Buy Now </a></td>
                     <td>
