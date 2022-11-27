@@ -35,6 +35,8 @@ public class HomeController {
                 modelAndView.setViewName("B2cUser/userhome");
             }else{
                 msg = "You Are In!";
+                // String imgUrl = "url('product/image/image2.jpg')";
+                // modelAndView.addObject("imgUrl", imgUrl);
                 modelAndView.addObject("message", msg);
                 modelAndView.addObject("products", productEntities);
                 modelAndView.addObject("userName", userName);

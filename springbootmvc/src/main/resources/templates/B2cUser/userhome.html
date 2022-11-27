@@ -23,7 +23,7 @@
         <h1>Product List</h1>
         <br/><br/>
         <h1 th:text="${message}" ></h1>
-        <table border="1" cellpadding="10">
+        <!-- <table border="1" cellpadding="10">
             <thead>
                 <tr>
                     <th>Sl. No.</th>
@@ -37,8 +37,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="data : ${products}">
-                    <td th:text="${data.id}"></td>
+                <tr th:each="data,num : ${products}">
+                    <td th:text="${num.count}"></td>
                    <td th:text="${data.productName}"></td>
                      <td th:text="${data.quantity}"></td>
                      <td th:text="${data.productType}"></td>
@@ -51,9 +51,23 @@
                     </td> 
                 </tr>
             </tbody>
-        </table>
-
+        </table> -->
     </div>
+        <div align="center" >
+
+            <div  th:each="data,num : ${products}" style="border:1px solid black; height: 350px;width: 219px;margin: 10px;display: inline-block; " >
+                <!-- <img src="product/image/image"+${num.count}+".jpg" /> -->
+                <img th:src="@{${'product/image/image'+num.count+'.jpg'}}" width="120"/>
+
+               <h2 th:text="${data.productName}"></h2>
+               <h2 th:text="${data.quantity}"></h2>
+               <h2 th:text="${data.productType}"></h2>
+               <h2 th:text="${data.productId}"></h2>
+              <h2>Price: </h2> <h2 th:text="${data.price}"></h2>
+              <a th:href="@{'/buyNow/' + ${data.productId} +'/'+ ${userId}+'/'+${data.sellerId}}">Buy Now</a><br/>
+              <a th:href="@{'/addToKart/' + ${data.productId} +'/'+ ${userId}+'/'+${data.sellerId}}">Add</a>
+            </div>
+        </div>
 </body>
 
 </html>
