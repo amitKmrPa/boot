@@ -8,16 +8,16 @@ Project description: It is a basic replica of Amazon e-commerce site. Any end us
 Functionality added are : User login, user registration, admin login, admin registration, forgot password, Session management, Password enciption, Buy products, add products.
 
 # Technology used
-java 17
-Spring boot mvc
-Maven
-ThymeLeaf
-Hibernet
-HTML 5
-CSS 3
-Bootstrap
-MYSQL
-JPA and Native query also
+java 17,
+Spring boot mvc,
+Maven,
+ThymeLeaf,
+Hibernet,
+HTML 5,
+CSS 3,
+Bootstrap,
+MYSQL,
+JPA and Native query also,
 github
 
 # How to run and Pre-Requrities
