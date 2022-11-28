@@ -25,8 +25,9 @@ Pre-requirities - A Computer System with any OS, JDK 17, Any Browser, Internet f
 Steps to run - 1. Open CMD/terminal in VS CODE
                2. Type - git init.
                3. Type - git clone https://github.com/amitKmrPa/boot.git
-               4. Search and navigate to SpringbootmvcApplication.java file from project and open it. If you see run|debbu option just above main function then                     click it. 
-               5. Open any browser and type [localhost ](http://localhost:8080/) in url box of your browser.
+               4. Type - git checkout amit_dev
+               5. Search and navigate to SpringbootmvcApplication.java file from project and open it. If you see run|debbu option just above main function then                     click it. 
+               6. Open any browser and type [localhost ](http://localhost:8080/) in url box of your browser.
               Congratulations! Now You can run my App
               
  # For Querie and Support
