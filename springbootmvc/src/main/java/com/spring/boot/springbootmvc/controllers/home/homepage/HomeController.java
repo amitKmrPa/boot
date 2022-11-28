@@ -29,7 +29,7 @@ public class HomeController {
         try {
             productEntities = productService.getAllProductDetails();
             if (userId==null && userName==null) {
-                msg = "Login First To Order or to add in kart";
+                msg = "Login First To Order or to add in cart";
                 modelAndView.addObject("message", msg);
                 modelAndView.addObject("products", productEntities);
                 modelAndView.setViewName("B2cUser/userhome");
