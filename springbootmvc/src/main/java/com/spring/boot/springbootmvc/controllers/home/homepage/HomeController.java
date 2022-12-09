@@ -1,10 +1,17 @@
 package com.spring.boot.springbootmvc.controllers.home.homepage;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,13 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
-
+import com.spring.boot.springbootmvc.controllers.user.products.ProductsBeans;
 
 @RestController
 public class HomeController {
     @Autowired
     ProductService productService;
-    @RequestMapping(value="/", method=RequestMethod.GET)
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView requestMethodName(HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
@@ -28,15 +36,13 @@ public class HomeController {
         String msg = "";
         try {
             productEntities = productService.getAllProductDetails();
-            if (userId==null && userName==null) {
+            if (userId == null && userName == null) {
                 msg = "Login First To Order or to add in cart";
                 modelAndView.addObject("message", msg);
                 modelAndView.addObject("products", productEntities);
                 modelAndView.setViewName("B2cUser/userhome");
-            }else{
+            } else {
                 msg = "You Are In!";
-                // String imgUrl = "url('product/image/image2.jpg')";
-                // modelAndView.addObject("imgUrl", imgUrl);
                 modelAndView.addObject("message", msg);
                 modelAndView.addObject("products", productEntities);
                 modelAndView.addObject("userName", userName);
@@ -49,5 +55,5 @@ public class HomeController {
         }
         return modelAndView;
     }
-    
+
 }

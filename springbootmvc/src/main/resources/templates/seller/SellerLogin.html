@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Login</title>
+    <script>
+        var regEx = /^[0-9a-zA-Z.*]+$/;
+        message = "Enter Only Alphanumeric & dot";
+        function chekUserId(val) {
+            if (!val.match(regEx)) {
+                document.getElementById("errId").innerHTML = message;
+                document.getElementById("usersId").focus();
+            } else {
+                document.getElementById("errId").innerHTML = "";
+            }
+        }
+
+        function chekPass(val) {
+            if (!val.match(regEx)) {
+                document.getElementById("errId").innerHTML = message;
+                document.getElementById("passId").focus();
+            } else {
+                document.getElementById("errId").innerHTML = "";
+            }
+        }
+    </script>
+</head>
+
+<body style="background-color: rgb(216, 131, 131);">
+    <div align="center"  >
+        <div>
+            <h2>Seller Login</h2>
+        </div>
+        <div>
+            <form action="/sellerLogin" method="post" modelAttribute="sellerLoginAtr">
+                <table border="0px solid black">
+                    <tr>
+                        <th>
+                            User Id
+                        </th>
+                        <th>
+                            <input type="text" name="userId" id="usersId" placeholder="Enter user id"
+                                onblur="chekUserId(this.value)" required />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Password
+                        </th>
+                        <th>
+                            <input type="password" name="userPass" id="passId" placeholder="Enter password"
+                                onblur="chekPass(this.value)" required />
+
+                        </th>
+
+                    </tr>
+                    <tr>
+
+                        <th colspan="2">
+                            <h3 id="errId"></h3>
+
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <th colspan="2">
+                            <input type="submit" value="Login" />
+                        </th>
+                    </tr>
+
+                </table>
+            </form>
+            <h3 th:text="${credMsg}"></h3>
+            <a align="center" href="/sellerRegPage">Click here for Registration.</a>
+            <a align="center" href="#">Forgot password ?</a>
+        </div>
+</body>
+
+</html>

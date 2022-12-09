@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Seller Add Products </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js">
+	</script>
+	<script>
+		function checkUserId(params) {
+			if (params) {
+				var data;
+				$.ajax({
+					url: 'http://localhost:8080/checkUserIdForUser/' + params,
+					type: 'POST',
+					contentType: "application/json; charset=utf-8",
+					async: false,
+				}).done(function (res) {
+					data = res;
+				}).fail(function (err) {
+					console.log('Error: ' + err.status);
+				});
+				if (data)
+					document.getElementById("availId").innerHTML = data;
+			}
+		}
+		function uploadFile() {
+			var fileName = "";
+			var file = document.getElementById("fileupload");
+			const selectedFile = file.files[0];
+			let formData = new FormData();
+			formData.set('file', selectedFile);
+			axios.post("http://localhost:8080/upload/", formData)
+				.then(res => {
+					fileName = res.data;
+					if (fileName !=="") {
+						alert("File uploaded successfully!");
+						loadFile(fileName);
+					}
+				})
+				.catch(function (err) {
+					alert("Failed to upload. Please upload again");
+
+					console.log('Error:' + err.status);
+				})
+			document.getElementById("submitId").disabled = false;
+		}
+
+		function loadFile(fileName) {
+			var oImg = document.createElement("img");
+			oImg.setAttribute('src', 'product/uploadedFile/' + fileName);
+			oImg.setAttribute('alt', 'na');
+			oImg.setAttribute('width', '205px');
+			document.getElementById("previewId").appendChild(oImg);
+		}
+	</script>
+</head>
+
+<body style="background-color: rgb(216, 131, 131);">
+	<div align="center">
+		<div>
+			<h2>Seller Add Products </h2>
+		</div>
+		<div>
+			<form action="addProductBySeller" method="post" modelAttribute="addProductAtr">
+				<table>
+					<tr>
+						<td>Product Name:</td>
+						<td><input type="text" name="productName" maxlength="100" required /></td>
+					</tr>
+
+					<tr>
+						<td>Product Quantity:</td>
+						<td><input type="number" name="quantity" required /></td>
+					</tr>
+
+					<tr>
+						<td>Product Type:</td>
+						<td><input type="text" name="productType" required /></td>
+					</tr>
+
+					<!-- <tr>
+						<td>Product Id:</td>
+						<td><input type="text" name="productId" required /></td>
+					</tr>  -->
+					<tr>
+						<td>price:</td>
+						<td><input type="text" name="price" required /></td>
+					</tr>
+					<tr>
+						<td>Inser Product image : </td>
+						<td><input id="fileupload" type="file" name="productImgId" required />
+							<input type="button" onclick="uploadFile()" value="upload" />
+						</td>
+					</tr>
+					<tr>
+						<td>Preview Image:</td>
+						<td>
+							<div id="previewId"></div>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<div align="center"><input type="submit" value="Add Products" disabled id="submitId" /></div>
+
+			</form>
+
+		</div>
+</body>
+
+</html>

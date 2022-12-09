@@ -1,5 +1,7 @@
 package com.spring.boot.springbootmvc.controllers.user.products;
 
+import java.sql.Blob;
+
 public class ProductsBeans {
     private String productName;
     private Integer quantity;
@@ -12,7 +14,13 @@ public class ProductsBeans {
     private String lastModifiedAt;
     private String deleteBy;
     private String updateBy;
+    private Integer price;
+    private String productImgId;
 
+    
+
+    public ProductsBeans() {
+    }
 
     /**
      * @return String return the productName
@@ -168,12 +176,35 @@ public class ProductsBeans {
         this.updateBy = updateBy;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getProductImgId() {
+        return productImgId;
+    }
+
+    public void setProductImgId(String productImgId) {
+        this.productImgId = productImgId;
+    }
+
     @Override
     public String toString() {
         return "ProductsBeans [productName=" + productName + ", quantity=" + quantity + ", productId=" + productId
                 + ", sellerId=" + sellerId + ", productType=" + productType + ", isDeleted=" + isDeleted
                 + ", createdAt=" + createdAt + ", deletedAt=" + deletedAt + ", lastModifiedAt=" + lastModifiedAt
-                + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + "]";
+                + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + ", price=" + price + ", productImgId="
+                + productImgId + "]";
     }
+
+
+
+
+
+    
 
 }

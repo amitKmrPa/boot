@@ -53,5 +53,18 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
+    @Override
+    public List<ProductEntity> getAllProductDetailsBySellerId(String userId) {
+        // TODO Auto-generated method stub
+        List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
+        try {
+            productEntities = productRepo.getAllProductDetailsBySellerId(userId);
+            return productEntities;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

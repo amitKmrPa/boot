@@ -9,5 +9,7 @@ public interface ProductService {
     List<ProductEntity> getAllProductDetails();
 
     List<Object> buyNow(String productId, String userId, String sellerId);
+
+    List<ProductEntity> getAllProductDetailsBySellerId(String userId);
     
 }

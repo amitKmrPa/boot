@@ -1,5 +1,7 @@
 package com.spring.boot.springbootmvc.controllers.user.products;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,6 +53,9 @@ public class ProductEntity {
     @Column(name = "updated_by")
     private String updateBy;
     
+    @Column(name = "product_Img_Id")    
+    private String productImgId;
+
 
     /**
      * @return int return the id
@@ -238,14 +243,22 @@ public class ProductEntity {
         this.price = price;
     }
 
+    public String getProductImgId() {
+        return productImgId;
+    }
+
+    public void setProductImgId(String productImgId) {
+        this.productImgId = productImgId;
+    }
+
     @Override
     public String toString() {
         return "ProductEntity [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", price="
                 + price + ", productId=" + productId + ", sellerId=" + sellerId + ", productType=" + productType
                 + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", deletedAt=" + deletedAt
-                + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy + "]";
+                + ", lastModifiedAt=" + lastModifiedAt + ", deleteBy=" + deleteBy + ", updateBy=" + updateBy
+                + ", productImgId=" + productImgId + "]";
     }
-
-    
+        
 
 }
