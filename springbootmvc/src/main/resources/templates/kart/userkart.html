@@ -77,7 +77,7 @@
                         </tr>
                         <tr>
                             <td>
-                               <button class="btn btn-success" style="border-radius: 9px;"> <a th:href="@{'/buyNow/' + ${data[3]}}">Buy Now </a></button>
+                               <button class="btn btn-success" style="border-radius: 9px;"> <a th:href="@{'/generateInvoice/' + ${data[3]}+'/'+${data[5]}+'/'+${data[0]}}">Order</a></button>
                             </td>
                             <td>
                                 <button class="btn btn-warning" style="border-radius: 9px;"><a th:href="@{'/removeFromKart/' + ${data[3]}+'/'+${data[5]}}">Remove</a>      </button>                        </td>

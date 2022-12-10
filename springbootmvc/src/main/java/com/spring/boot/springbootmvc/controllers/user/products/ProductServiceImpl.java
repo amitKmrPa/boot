@@ -1,6 +1,10 @@
 package com.spring.boot.springbootmvc.controllers.user.products;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -38,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
             productEntities = productRepo.getProductForUser(productId,sellerId);
             UUID uuid = UUID.randomUUID();
             String uuidAsString = uuid.toString();    
-            System.out.println("Your UUID is: " + uuidAsString);
             orders.setOrderId(uuidAsString);
             orders.setProductId(productEntities.getProductId());
             orders.setSellerId(productEntities.getSellerId());

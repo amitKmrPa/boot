@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
-    @Query("select u from ProductEntity u")
+    @Query("select u from ProductEntity u where quantity !=0")
     List<ProductEntity> getAllProductDetails();
 
     @Query("select u from ProductEntity u where productId=:productId")
@@ -23,6 +23,9 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
 
     @Query("select u from ProductEntity u")
     List<ProductEntity> getProductList();
+    
+    @Query("select u from ProductEntity u where productId=:productId")
+    ProductEntity getProductDetailsById(String productId);
 
     // List<Kart> addToKart(String userId);
 
