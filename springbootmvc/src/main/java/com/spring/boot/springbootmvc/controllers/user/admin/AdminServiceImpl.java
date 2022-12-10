@@ -28,7 +28,6 @@ public class AdminServiceImpl implements AdminServices {
              if(!adminBeans.getUserId().equalsIgnoreCase("")){
                 admn = adminRepo.getAdminDetails(adminBeans.getUserId());
                  dStr = new String(decoder.decode(admn.getUserPass()));  
-
              }
             if (dStr.equals(password)) {
                 return admn;

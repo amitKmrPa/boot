@@ -11,5 +11,8 @@ public interface ProductService {
     List<Object> buyNow(String productId, String userId, String sellerId);
 
     List<ProductEntity> getAllProductDetailsBySellerId(String userId);
+
+    List<ProductEntity> getProductList();
+
     
 }

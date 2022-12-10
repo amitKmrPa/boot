@@ -21,6 +21,9 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("select u from ProductEntity u where sellerId=:userId")
     List<ProductEntity> getAllProductDetailsBySellerId(@Param("userId") String userId);
 
+    @Query("select u from ProductEntity u")
+    List<ProductEntity> getProductList();
+
     // List<Kart> addToKart(String userId);
 
     

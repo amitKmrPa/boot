@@ -14,12 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.boot.springbootmvc.controllers.user.b2cuser.B2cEntity;
+import com.spring.boot.springbootmvc.controllers.user.b2cuser.B2cServices;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
+import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
+
 @RestController
 public class AdminController {
     @Autowired
     AdminServices adminservice;
     private static final Integer role = 7077;
-
+    @Autowired
+    ProductService productService;
+    @Autowired
+    B2cServices b2cServices;
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView welcomePage(@ModelAttribute("userDetails") AdminBeans adminBeans,
             HttpServletRequest httpServletRequest) {
@@ -77,6 +85,8 @@ public class AdminController {
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
+            modelAndView.setViewName("redirect:/index");
+            return modelAndView;
         }
 
         try {
@@ -99,7 +109,6 @@ public class AdminController {
                 modelAndView.addObject("userName", userName);
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("admin/home");
-
                 return modelAndView;
 
             } else {
@@ -233,14 +242,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
-    public ModelAndView getAllUser() {
+    public ModelAndView getAllUser(HttpSession httpSession) {
+        String userId = (String)httpSession.getAttribute("userId");
+        String userName = (String)httpSession.getAttribute("userName");
         List<AdminEntity> admList = new ArrayList<AdminEntity>();
         ModelAndView modelAndView = new ModelAndView();
         try {
-            admList = adminservice.getAllUser();
-            modelAndView.addObject("admList", admList);
-            modelAndView.setViewName("admin/adminlist");
-            return modelAndView;
+            if (userId != null && userName != null && role == 7077 ) {
+                
+                admList = adminservice.getAllUser();
+                modelAndView.addObject("admList", admList);
+                modelAndView.setViewName("admin/adminlist");
+                return modelAndView;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -313,5 +329,37 @@ public class AdminController {
             // TODO: handle exception
         }
         return msg;
+    }
+
+    @RequestMapping("/getProductList")
+    public ModelAndView getProductList() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<ProductEntity> productEntity = new ArrayList<>();
+        try {
+            productEntity =   productService.getProductList();
+            modelAndView.addObject("products", productEntity);
+            modelAndView.setViewName("admin/productList");
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getUserList")
+    public ModelAndView getUserList() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<B2cEntity> b2cEntities = new ArrayList<>();
+        try {
+            b2cEntities =   b2cServices.getUserList();
+            modelAndView.addObject("b2cEntities", b2cEntities);
+            modelAndView.setViewName("admin/UserList");
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
     }
 }

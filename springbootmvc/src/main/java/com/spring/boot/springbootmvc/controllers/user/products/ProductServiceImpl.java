@@ -66,5 +66,18 @@ public class ProductServiceImpl implements ProductService {
             return null;
         }
     }
+    @Override
+    public List<ProductEntity> getProductList() {
+        // TODO Auto-generated method stub
+        List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
+        try {
+            productEntities = productRepo.getProductList();
+            return productEntities;    
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }   
+    }
     
 }

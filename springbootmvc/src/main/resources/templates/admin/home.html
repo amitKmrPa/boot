@@ -147,10 +147,17 @@ body {
 
 
 		// document.getElementById("myText").innerHTML = data;
+		window.open("http://localhost:8080/getAllUser");
 		document.getElementById("view").style.display = "block";
 		document.getElementById("add").style.display = "none";
 		document.getElementById("upd").style.display = "none";
 		document.getElementById("del").style.display = "none";
+	}
+	function product(){
+		window.open("http://localhost:8080/getProductList");
+	}
+	function user(){
+		window.open("http://localhost:8080/getUserList");
 	}
 	function cheUserId(params) {
 		if (params) {
@@ -194,14 +201,18 @@ body {
 				<li class="nav-item active"><lable class="nav-link"
 						onclick="add();"> Add </lable></li>
 				<!-- <li class="nav-item"><a class="nav-link" onclick="del()">
-						Delete </a></li> -->
+						 </a></li> -->
 
-				<!-- <li class="nav-item"><a class="nav-link" onclick="upd();">
-						Update </a></li> -->
+				<!--  -->
 
-				<li class="nav-item"><a class="nav-link" href="http://localhost:8080/getAllUser" onclick="view()">
-						Display </a></li>
+				<li class="nav-item active"><label class="nav-link"  onclick="view();">
+						View admin list </label></li>
 
+						<li class="nav-item active"><a class="nav-link" onclick="product();">
+							View All Product </a></li>
+
+							<li class="nav-item active"><a class="nav-link" onclick="user();">
+								View All Users </a></li>
 
 			</ul>
 			<!--     <form class="form-inline ml-auto mt-2 mt-md-0">  
@@ -216,8 +227,6 @@ body {
 			<div id="add" align="center">
 				<form action="addAdmin" method="post" modelAttribute="addAtr" >
 								<h1 align="center">Add New Admin Account </h1>
-											
-
 					<table>
 						<tr>
 							<td>Full Name:</td>

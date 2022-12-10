@@ -2,9 +2,11 @@ package com.spring.boot.springbootmvc.controllers.user.b2cuser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +77,19 @@ public class B2cServicesImpl implements B2cServices {
             } else {
              return null;   
             }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @Override
+    public List<B2cEntity> getUserList() {
+        // TODO Auto-generated method stub
+        List<B2cEntity> b2cEntities = new ArrayList<B2cEntity>();
+        try {
+            b2cEntities = b2cRepo.getUserList();
+            return b2cEntities;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
