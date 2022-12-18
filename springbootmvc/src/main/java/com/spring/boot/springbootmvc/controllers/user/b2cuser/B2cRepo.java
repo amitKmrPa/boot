@@ -14,10 +14,13 @@ public interface B2cRepo extends JpaRepository<B2cEntity, Long> {
     B2cEntity checkUserId(@Param("userId") String userId);
 
     @Query("select u from B2cEntity u where userId=:userId")
-    B2cEntity getAdminDetails(@Param("userId") String userId);
+    B2cEntity getUserDetails(@Param("userId") String userId);
 
     @Query("select u from B2cEntity u ")
     List<B2cEntity> getUserList();
+
+    @Query("select u from B2cEntity u where userId=:userId")
+    B2cEntity getUserDetailsForReact(@Param("userId") String userId);
 
     // String checkUserId(String userId);
     

@@ -77,7 +77,6 @@ public class InvoiceServiceImpl implements InvoiceService{
 
            }
             invoiceObj = invoiceRepo.generateInvoice(productId, sellerId, userId);
-            System.out.println(invoiceObj.toString());
             return invoiceObj;
         } catch (Exception e) {
             // TODO: handle exception+

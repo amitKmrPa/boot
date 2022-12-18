@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class B2cController {
     @Autowired
@@ -100,6 +103,18 @@ public class B2cController {
         return msg;
     }
 
+    @RequestMapping(value = "/userLoginForReact", method = RequestMethod.POST)
+    public Object userLoginForReact(@RequestParam("userId") String userId,@RequestParam("userPassword") String userPassword) {
+        Object userDetails = new Object();
+        try {
+            userDetails = b2cServices.userLoginForReact(userId, userPassword);
+            return userDetails;        
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public ModelAndView userLogin(@ModelAttribute("userLoginAtr") B2cBeans b2cBeans,
             HttpServletRequest httpServletRequest) {
@@ -155,6 +170,20 @@ public class B2cController {
             e.printStackTrace();
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/getAllProductsDetailsForReduxAppToBuy")
+    public List<Object> getAllProductsDetailsForReduxAppToBuy(@RequestParam("userId") String userId,@RequestParam("productId") String productId,@RequestParam("sellerId") String sellerId,HttpSession httpSession) {
+        List<Object> orders =new ArrayList<>();
+        try {
+            orders = productService.buyNow(productId,userId,sellerId);
+            System.out.println("==");
+            return orders;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
     }
     
 }

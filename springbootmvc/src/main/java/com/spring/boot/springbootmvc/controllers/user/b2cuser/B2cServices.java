@@ -11,5 +11,7 @@ public interface B2cServices {
     B2cEntity userLogin(B2cBeans b2cBeans);
 
     List<B2cEntity> getUserList();
+
+    Object userLoginForReact(String userId, String password);
     
 }

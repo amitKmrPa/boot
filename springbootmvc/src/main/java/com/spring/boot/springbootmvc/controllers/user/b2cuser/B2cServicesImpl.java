@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service("b2cServices")
 public class B2cServicesImpl implements B2cServices {
@@ -70,7 +71,7 @@ public class B2cServicesImpl implements B2cServices {
         try {
              String password = b2cBeans.getUserPass();
              Base64.Decoder decoder = Base64.getMimeDecoder();
-             b2cEntity = b2cRepo.getAdminDetails(b2cBeans.getUserId());
+             b2cEntity = b2cRepo.getUserDetails(b2cBeans.getUserId());
              String dStr = new String(decoder.decode(b2cEntity.getUserPass()));  
             if (dStr.equals(password)) {
                 return b2cEntity;
@@ -90,6 +91,41 @@ public class B2cServicesImpl implements B2cServices {
         try {
             b2cEntities = b2cRepo.getUserList();
             return b2cEntities;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @Override
+    public Object userLoginForReact(String userId, String password) {
+        B2cEntity b2cEntity = new B2cEntity();
+        Object listObj = new ArrayList<>();
+        try { 
+            Base64.Decoder decoder = Base64.getMimeDecoder();
+            String strUserId = "";
+            String strPassword = "";
+            for (int i = 0; i < userId.length(); i++) {
+                if(userId.charAt(i)!= '"')
+                strUserId+=userId.charAt(i);
+            }
+            for (int i = 0; i < password.length(); i++) {
+                if(password.charAt(i)!= '"')
+                strPassword+=password.charAt(i);
+            }
+            b2cEntity = b2cRepo.getUserDetailsForReact(strUserId);
+            String dStr = new String(decoder.decode(b2cEntity.getUserPass()));  
+            String dbPass = "";
+            for (int i = 0; i < dStr.length(); i++) {
+                if(dStr.charAt(i)!= '"')
+                dbPass+=dStr.charAt(i);
+            }
+           if (dbPass.equals(strPassword)) {
+                listObj = (Object) b2cEntity;
+               return listObj;
+           } else {
+            return null;   
+           }
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

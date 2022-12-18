@@ -48,7 +48,6 @@ public class ProductServiceImpl implements ProductService {
             orders.setUserId(userId);
             ordersRepo.saveAndFlush(orders);
             listOrder = ordersRepo.buyNow(uuidAsString);
-            System.out.println(listOrder);
             return listOrder;
         } catch (Exception e) {
             // TODO: handle exception

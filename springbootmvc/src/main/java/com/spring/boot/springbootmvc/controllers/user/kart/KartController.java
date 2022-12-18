@@ -6,12 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class KartController {
     @Autowired
@@ -45,5 +47,19 @@ public class KartController {
             e.printStackTrace();
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value="/removeFromKartForRedux", method = RequestMethod.POST)
+    public List<Object> removeFromKartForRedux(@RequestParam("productId") String productId,@RequestParam("sellerId") String sellerId, @RequestParam("userId") String userId){
+        List<Object> listKart = new ArrayList<>();
+        String msg = "";
+        try {
+            listKart = kartService.removeFromKart(productId,sellerId,userId);
+            return listKart;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
     }
 }

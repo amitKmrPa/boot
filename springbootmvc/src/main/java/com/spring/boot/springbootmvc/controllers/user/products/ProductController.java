@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.boot.springbootmvc.controllers.user.kart.KartService;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ProductController {
@@ -38,6 +41,7 @@ public class ProductController {
             return null;
         }
     }
+
     @RequestMapping(value = "/getAllProductsDetailsForReduxApp")
     public List<Object> getAllProductsDetailsForReduxApp(HttpSession httpSession) {
         List<Object> listOfProduct = new ArrayList<>();
@@ -45,7 +49,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             productEntities = productService.getAllProductDetails();
-            System.out.println(productEntities);
             for (ProductEntity productEntity : productEntities) {
                 listOfProduct.add(productEntity);
             }
@@ -56,19 +59,38 @@ public class ProductController {
             return null;
         }
     }
+
     @RequestMapping(value = "/addToKart/{productId}/{userId}/{sellerId}")
-    public ModelAndView addToKart(@PathVariable String productId,@PathVariable String userId,@PathVariable String sellerId,HttpSession httpSession){
+    public ModelAndView addToKart(@PathVariable String productId, @PathVariable String userId,
+            @PathVariable String sellerId, HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         List<Object> product = new ArrayList<>();
         try {
-            if (!userId.equalsIgnoreCase("null")) {                
-                product = kartrService.addToKart(productId,userId,sellerId);
-                modelAndView.addObject("product", product);           
+            if (!userId.equalsIgnoreCase("null")) {
+                product = kartrService.addToKart(productId, userId, sellerId);
+                modelAndView.addObject("product", product);
                 modelAndView.setViewName("kart/userkart");
-            }else{
+            } else {
                 modelAndView.setViewName("redirect:/");
             }
             return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/addToKartForRedux", method = RequestMethod.POST)
+    public List<Object> addToKartForRedux(@RequestParam("productId") String productId,
+            @RequestParam("userId") String userId, @RequestParam("sellerId") String sellerId, HttpSession httpSession) {
+        List<Object> product = new ArrayList<>();
+        try {
+            if (!userId.equalsIgnoreCase("null")) {
+                product = kartrService.addToKart(productId, userId, sellerId);
+            } else {
+            }
+            return product;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
