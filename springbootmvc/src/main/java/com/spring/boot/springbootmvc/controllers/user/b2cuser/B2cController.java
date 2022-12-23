@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.8:19000"})
 @RestController
 public class B2cController {
     @Autowired
@@ -162,14 +162,13 @@ public class B2cController {
                 modelAndView.setViewName("buynowpreview/buynow");
             } else {
                 modelAndView.setViewName("redirect:/");
-
             }
             return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
+            return null;
         }
-        return modelAndView;
     }
 
     @RequestMapping(value = "/getAllProductsDetailsForReduxAppToBuy")

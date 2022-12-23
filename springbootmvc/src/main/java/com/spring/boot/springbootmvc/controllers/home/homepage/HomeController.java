@@ -8,16 +8,13 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.spring.boot.springbootmvc.controllers.user.admin.AdminController;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductEntity;
 import com.spring.boot.springbootmvc.controllers.user.products.ProductService;
@@ -50,11 +47,12 @@ public class HomeController {
                 modelAndView.addObject("userId", userId);
                 modelAndView.setViewName("B2cUser/userhome");
             }
+            return modelAndView;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
+            return null;
         }
-        return modelAndView;
     }
 
 }

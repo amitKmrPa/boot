@@ -16,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.boot.springbootmvc.controllers.user.kart.KartService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.12:19000"})
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProductController {
     @Autowired
