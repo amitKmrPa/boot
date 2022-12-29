@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.boot.springbootmvc.controllers.user.kart.KartService;
 
-@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.12:19000"})
+@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.12:19000","http://localhost:4200"})
 // @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProductController {
@@ -47,6 +47,7 @@ public class ProductController {
     public List<Object> getAllProductsDetailsForReduxApp(HttpSession httpSession) {
         List<Object> listOfProduct = new ArrayList<>();
         List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
+        System.out.println("====");
         ModelAndView modelAndView = new ModelAndView();
         try {
             productEntities = productService.getAllProductDetails();

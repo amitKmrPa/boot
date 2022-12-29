@@ -87,8 +87,60 @@ public class B2cController {
             modelAndView.addObject("message", msg);
             modelAndView.setViewName("messages/failed");
             return modelAndView;
-
         }
+    }
+
+    @RequestMapping(value = "/userForgotPassword")
+    public ModelAndView userForgotPassword() {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            modelAndView.setViewName("B2cUser/userForgotPassword");
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            modelAndView.setViewName("messages/failed");
+            return modelAndView;
+        }
+    }
+
+    @RequestMapping("/userForgotPasswordSubmit")
+    public ModelAndView userForgotPasswordSubmit(@ModelAttribute("userForgotPass") B2cEntity b2cEntity) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            if (!b2cEntity.getUserId().equalsIgnoreCase("")) {
+                modelAndView.addObject("userId", b2cEntity.getUserId());
+                modelAndView.setViewName("B2cUser/userChangePassword");
+            } else {
+                modelAndView.setViewName("redirect:/userForgotPassword");
+                return modelAndView;
+            }
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/generateNewPasswordForUser/{userId}", method = RequestMethod.POST)
+    public ModelAndView generateNewPassword(@PathVariable String userId,
+            @ModelAttribute("generatePass") B2cBeans b2cBeans) {
+        ModelAndView modelAndView = new ModelAndView();
+        String msg = "";
+        try {
+            if (b2cBeans.getUserPass().equalsIgnoreCase(b2cBeans.getPassword2())) {
+                msg = b2cServices.generateNewPassword(b2cBeans, userId);
+                modelAndView.addObject("message", msg);
+                modelAndView.setViewName("messages/success");
+            }
+            return modelAndView;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            return modelAndView;
+        }
+
     }
 
     @RequestMapping(value = "/checkUserIdForUser/{userId}", method = RequestMethod.POST)
@@ -121,7 +173,6 @@ public class B2cController {
         HttpSession session = httpServletRequest.getSession();
         ModelAndView modelAndView = new ModelAndView();
         List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
-
         B2cEntity b2cEntity = null;
         try {
             b2cEntity = b2cServices.userLogin(b2cBeans);
@@ -143,7 +194,6 @@ public class B2cController {
                 modelAndView.setViewName("B2cUser/B2cUserLogin");
                 return modelAndView;
             }
-
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

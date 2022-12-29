@@ -34,9 +34,10 @@ public class HomeController {
         String msg = "";
         try {
             productEntities = productService.getAllProductDetails();
+            msg = "Home Page";
             if (userId == null && userName == null) {
-                msg = "Login First To Order or to add in cart";
                 modelAndView.addObject("message", msg);
+                modelAndView.addObject("err", "Please Login First");
                 modelAndView.addObject("products", productEntities);
                 modelAndView.setViewName("B2cUser/userhome");
             } else {

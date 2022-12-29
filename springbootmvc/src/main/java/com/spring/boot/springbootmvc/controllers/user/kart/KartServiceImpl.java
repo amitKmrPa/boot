@@ -81,11 +81,15 @@ public class KartServiceImpl implements KartService {
         List<Object> listKart = new ArrayList<>();
         try {
             kart = kartRepo.removeFromKart(productId, sellerId, userId);
-            kart.setProductCount(kart.getProductCount()-product_count);
+            if (kart.getProductCount()<=0) {
+                
+                kart.setProductCount(0);
+            } else {
+                kart.setProductCount(kart.getProductCount()-product_count);   
+            }
             kartRepo.saveAndFlush(kart);
             listKart = kartRepo.kartList(userId);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         return listKart;

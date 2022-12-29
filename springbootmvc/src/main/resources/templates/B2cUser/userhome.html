@@ -27,7 +27,8 @@
                 style="block-size: 45px;float:right" /></a>
         <!-- <h1>Product List</h1> -->
         <br /><br />
-        <h1 th:text="${message}" ></h1>
+        <h1 th:unless="${userId}" th:text="${err}" ></h1>
+     <h1 th:if="${userId}" th:text="${userName}" ></h1>
     </div>
     <div align="center">
         <div th:each="data,num : ${products}"

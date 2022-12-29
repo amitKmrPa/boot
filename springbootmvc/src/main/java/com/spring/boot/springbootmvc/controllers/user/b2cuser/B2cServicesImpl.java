@@ -132,5 +132,29 @@ public class B2cServicesImpl implements B2cServices {
             return null;
         }
     }
+    @Override
+    public String generateNewPassword(B2cBeans b2cBeans, String userId) {
+        // TODO Auto-generated method stub
+        B2cEntity b2cEntity = new B2cEntity();
+        String msg = "";
+        try {
+            b2cEntity =  b2cRepo.findAdminUserById(userId);
+            if (b2cEntity.getUserId().equalsIgnoreCase(userId)) {
+                String password = b2cBeans.getUserPass();
+                Base64.Encoder encoder = Base64.getMimeEncoder();  
+                String eStr = encoder.encodeToString(password.getBytes());    
+                b2cEntity.setUserPass(eStr);
+                b2cRepo.saveAndFlush(b2cEntity);
+                msg = "New password generated.";
+            }
+            return msg;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            msg = "New Password generation failed.";
+            return msg;
+
+        }
+    }
     
 }
