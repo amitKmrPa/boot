@@ -90,6 +90,32 @@ public class B2cController {
         }
     }
 
+    @RequestMapping(value = "/registerForRedux", method = RequestMethod.POST)
+    public String registerForRedux(@RequestParam("userName") String userName,@RequestParam("userId") String userId,@RequestParam("userPassword") String userPassword,@RequestParam("age") Integer age,@RequestParam("emailId") String emailId,@RequestParam("phone") String phone,@RequestParam("gender") String gender) {
+        ModelAndView modelAndView = new ModelAndView();
+        B2cBeans b2cBeans = new B2cBeans();
+        String msg = "";
+        try {
+            b2cBeans.setAge(age);
+            b2cBeans.setEmailId(emailId);
+            b2cBeans.setGender(gender);
+            b2cBeans.setPhone(phone);
+            b2cBeans.setUserId(userId);
+            b2cBeans.setUserName(userName);
+            b2cBeans.setUserPass(userPassword);
+            msg = b2cServices.saveB2cUserDetails(b2cBeans);
+            modelAndView.addObject("message", msg);
+            modelAndView.setViewName("messages/success");
+            return msg;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            modelAndView.addObject("message", msg);
+            modelAndView.setViewName("messages/failed");
+            return msg;
+        }
+    }
+
     @RequestMapping(value = "/userForgotPassword")
     public ModelAndView userForgotPassword() {
         ModelAndView modelAndView = new ModelAndView();

@@ -2,9 +2,7 @@ package com.spring.boot.springbootmvc.controllers.user.kart;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +28,20 @@ public class KartController {
             modelAndView.setViewName("kart/userkart");
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
         return modelAndView;
+    }
+    @RequestMapping(value="/viewUserKartForRedux/{userId}",method = RequestMethod.GET)
+    public List<Object> viewUserKartForRedux(@PathVariable("userId") String userId){
+        List<Object> kart = new ArrayList<>();
+        try {
+            kart =  kartService.viewUserKart(userId);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return kart;
     }
     @RequestMapping(value="/removeFromKart/{productId}/{sellerId}")
     public ModelAndView removeFromKart(@PathVariable("productId") String productId,@PathVariable("sellerId") String sellerId, HttpSession httpSession){

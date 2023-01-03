@@ -47,7 +47,6 @@ public class ProductController {
     public List<Object> getAllProductsDetailsForReduxApp(HttpSession httpSession) {
         List<Object> listOfProduct = new ArrayList<>();
         List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
-        System.out.println("====");
         ModelAndView modelAndView = new ModelAndView();
         try {
             productEntities = productService.getAllProductDetails();

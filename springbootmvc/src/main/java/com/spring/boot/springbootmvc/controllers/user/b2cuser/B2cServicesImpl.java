@@ -20,6 +20,7 @@ public class B2cServicesImpl implements B2cServices {
     @Override
     public String saveB2cUserDetails(B2cBeans b2cBeans) {
         // TODO Auto-generated method stub
+        System.out.println();
         B2cEntity b2cEntity = new B2cEntity();
         String msg = "";
         try {
