@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service("b2cServices")
 public class B2cServicesImpl implements B2cServices {
@@ -63,7 +62,6 @@ public class B2cServicesImpl implements B2cServices {
             e.printStackTrace();
             msg = "User Id is available.";
             return msg;
-
         }
     }
     @Override
