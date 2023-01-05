@@ -324,6 +324,7 @@ public class AdminController {
             msg = adminservice.checkUserId(userId);
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
         return msg;
     }

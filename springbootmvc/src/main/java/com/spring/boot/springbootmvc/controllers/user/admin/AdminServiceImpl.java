@@ -67,6 +67,7 @@ public class AdminServiceImpl implements AdminServices {
             return msg;
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
             msg = " Sorry! Details do not saved.";
             return msg;
         }
@@ -109,6 +110,7 @@ public class AdminServiceImpl implements AdminServices {
             return msg;
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
             msg = " Sorry! Details can't be updated.";
             return msg;
         }
