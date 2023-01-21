@@ -1,0 +1,1 @@
+[ProductEntity [id=1, productName=TV, quantity=98, price=10000, productId=c0cfbe61-2d86-47d9-b4fc-5669c4b0fc6b, sellerId=amitkmr1234, productType=electronics, isDeleted=0, createdAt=2023-00-05 11:00:52, deletedAt=null, lastModifiedAt=null, deleteBy=null, updateBy=null, productImgId=c0cfbe61-2d86-47d9-b4fc-5669c4b0fc6bimage1.jpg]]

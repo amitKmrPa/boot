@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.12:19000"})
+@CrossOrigin(origins = {"http://localhost:3000","http://192.168.2.12:19000","http://localhost:4200"})
 @RestController
 public class KartController {
     @Autowired
@@ -37,6 +37,7 @@ public class KartController {
         List<Object> kart = new ArrayList<>();
         try {
             kart =  kartService.viewUserKart(userId);
+            System.out.println(kart);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

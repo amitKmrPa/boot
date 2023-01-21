@@ -1,5 +1,9 @@
 package com.spring.boot.springbootmvc.controllers.user.products;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepo productRepo;
     @Autowired
     OrdersRepo ordersRepo;
+
     @Override
     public List<ProductEntity> getAllProductDetails() {
         // TODO Auto-generated method stub
@@ -32,16 +37,17 @@ public class ProductServiceImpl implements ProductService {
         }
         return productEntities;
     }
+
     @Override
     public List<Object> buyNow(String productId, String userId, String sellerId) {
         // TODO Auto-generated method stub
-        Order orders=new Order();
+        Order orders = new Order();
         List<Object> listOrder = new ArrayList<>();
         ProductEntity productEntities = new ProductEntity();
         try {
-            productEntities = productRepo.getProductForUser(productId,sellerId);
+            productEntities = productRepo.getProductForUser(productId, sellerId);
             UUID uuid = UUID.randomUUID();
-            String uuidAsString = uuid.toString();    
+            String uuidAsString = uuid.toString();
             orders.setOrderId(uuidAsString);
             orders.setProductId(productEntities.getProductId());
             orders.setSellerId(productEntities.getSellerId());
@@ -55,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
+
     @Override
     public List<ProductEntity> getAllProductDetailsBySellerId(String userId) {
         // TODO Auto-generated method stub
@@ -68,18 +75,19 @@ public class ProductServiceImpl implements ProductService {
             return null;
         }
     }
+
     @Override
     public List<ProductEntity> getProductList() {
         // TODO Auto-generated method stub
         List<ProductEntity> productEntities = new ArrayList<ProductEntity>();
         try {
             productEntities = productRepo.getProductList();
-            return productEntities;    
+            return productEntities;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
             return null;
-        }   
+        }
     }
-    
+
 }
