@@ -238,11 +238,16 @@ public class AdminServiceImpl implements AdminServices {
         String msg = "";
         AdminEntity adminEntity = new AdminEntity();
         try {
+            if (adminEntity.getUserId()!=null) {
+                
+            
                 adminEntity = adminRepo.checkUserId(userId);
-            if (adminEntity.getUserId().equalsIgnoreCase(userId)) {
+            if ( adminEntity.getUserId().equalsIgnoreCase(userId)) {
                 msg = "This user Id is alredy taken.";
             }
+        }
             return msg;
+
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

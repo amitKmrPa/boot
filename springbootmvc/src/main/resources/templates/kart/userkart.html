@@ -29,7 +29,7 @@
     </div>
     <div align="center">
         <div th:each="data,num : ${product}"
-            style="border:1px solid black; height: 350px;width: 219px;margin: 10px;display: inline-block; ">
+            style="border:1px solid black; height: auto;width: 219px;margin: 10px;display: inline-block; ">
             <img th:src="@{${'http://localhost:8080/product/uploadedFile/'+data[6]}}" width="205px" />
             <div style="margin-top:30px ;" >
                 <table>
@@ -40,7 +40,6 @@
                             </td>
                             <td>
                                 <span th:text="${data[1]}"></span>
-
                             </td>
                         </tr> 
                         <tr>

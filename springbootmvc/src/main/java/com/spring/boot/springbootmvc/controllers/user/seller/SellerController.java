@@ -158,13 +158,13 @@ public class SellerController {
 
     @PostMapping("/upload") 
     public ResponseEntity<?> handleFileUpload( @RequestParam("file") MultipartFile file ) {  
-      String fileName = file.getOriginalFilename();
+    //   String fileName = file.getOriginalFilename();
       UUID uuid = UUID.randomUUID();
       String uuidAsString = uuid.toString();  
       try {
-        file.transferTo( new File("C:\\Users\\pin2k\\projects\\boot\\springbootmvc\\src\\main\\resources\\static\\product\\uploadedFile\\" + uuidAsString + fileName));
+        file.transferTo( new File("C:\\Users\\AJIT KUMAR PASWAN\\Desktop\\amit\\boot\\springbootmvc\\src\\main\\resources\\static\\product\\uploadedFile\\" + uuidAsString ));
         productId = uuidAsString;
-        imageData=uuidAsString+fileName;
+        imageData=uuidAsString;
       } catch (Exception e) {
         imageData="Server Error";
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

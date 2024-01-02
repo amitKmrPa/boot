@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface B2cRepo extends JpaRepository<B2cEntity, Long> {
+public interface B2cRepo extends JpaRepository<B2cEntity, Integer> {
 
     @Query("select u from B2cEntity u where userId=:userId")
     B2cEntity checkUserId(@Param("userId") String userId);

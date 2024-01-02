@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 @Repository
-public interface KartRepo extends JpaRepository<Kart , Long>{
+public interface KartRepo extends JpaRepository<Kart , Integer>{
     @Query(value="select u.product_count,v.product_name,v.price,v.product_Id,v.product_type,u.seller_Id,v.product_Img_Id from kart u inner join products_data v on u.product_Id=v.product_Id where u.user_Id=?1 and u.is_deleted=0 and u.product_count !=0",nativeQuery = true)
     // @Query("select u from Kart u inner join ProductEntity v on u.productId=v.productId where u.userId=:userId")
     List<Object> addToKart(@Param("userId") String userId);

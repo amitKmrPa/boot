@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepo extends JpaRepository<AdminEntity, Long> {
+public interface AdminRepo extends JpaRepository<AdminEntity, Integer> {
 
     // @Query(value = "select * from admin_table where user_Id =?1", nativeQuery =
     // true)

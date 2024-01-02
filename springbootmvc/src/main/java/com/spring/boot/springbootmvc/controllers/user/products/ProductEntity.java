@@ -23,6 +23,9 @@ public class ProductEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "available_data")
+    private Integer availableData;
+
     @Column(name = "price")
     private Integer price;
 
@@ -251,6 +254,8 @@ public class ProductEntity {
         this.productImgId = productImgId;
     }
 
+    
+
     @Override
     public String toString() {
         return "ProductEntity [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", price="
@@ -260,5 +265,20 @@ public class ProductEntity {
                 + ", productImgId=" + productImgId + "]";
     }
         
+
+
+    /**
+     * @return Integer return the availableData
+     */
+    public Integer getAvailableData() {
+        return availableData;
+    }
+
+    /**
+     * @param availableData the availableData to set
+     */
+    public void setAvailableData(Integer availableData) {
+        this.availableData = availableData;
+    }
 
 }

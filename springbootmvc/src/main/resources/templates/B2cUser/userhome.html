@@ -32,7 +32,7 @@
     </div>
     <div align="center">
         <div th:each="data,num : ${products}"
-            style="border:1px solid black; height: 350px;width: 219px;margin: 10px;display: inline-block; ">
+            style="border:1px solid black; height: auto;width: auto;margin: 10px;display: inline-block; ">
             <img th:src="@{${'product/uploadedFile/'+data.productImgId}}" width="205px" />
             <div style="margin-top:30px ;" id="myUL" >
                 <table >
@@ -45,14 +45,14 @@
                                 <span th:text="${data.productName}"></span>
                             </td>
                         </tr> 
-                        <tr>
+                         <tr>
                             <th>
-                               <span> Product quantity :</span>
+                               <span> Available :</span>
                             </th>
                             <td>
-                                <span th:text="${data.quantity}"></span>
+                                <span th:text="${data.availableData}"></span>
                             </td>
-                        </tr> 
+                        </tr>  
                          <tr>
                             <th>
                                <span> Product type :</span>

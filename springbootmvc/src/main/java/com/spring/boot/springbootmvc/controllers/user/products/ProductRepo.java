@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
+public interface ProductRepo extends JpaRepository<ProductEntity, Integer> {
     @Query("select u from ProductEntity u where quantity !=0")
     List<ProductEntity> getAllProductDetails();
 

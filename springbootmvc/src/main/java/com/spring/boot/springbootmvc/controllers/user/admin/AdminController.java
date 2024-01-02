@@ -64,6 +64,8 @@ public class AdminController {
     public ModelAndView login(@ModelAttribute("userDetails") AdminBeans adminBeans,
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
+        System.out.println(session.getAttribute("userId"));
+        System.out.println(session.getAttribute("userName"));
         ModelAndView modelAndView = new ModelAndView();
         AdminEntity admn = null;
         AdminEntity adminEntity = new AdminEntity();
@@ -139,8 +141,10 @@ public class AdminController {
         AdminEntity adminEntity = new AdminEntity();
         try {
             adminEntity = adminservice.getUserDetails((String) httpSession.getAttribute("userId"));
+            int x=adminEntity.getAdminSecurity();
+            
             if (adminEntity.getAdminType().equalsIgnoreCase("super")
-                    && adminEntity.getAdminSecurity() == role) {
+                    && adminEntity.getAdminSecurity() == role.intValue()) {
                 msg = adminservice.addAdmin(adminBeans);
                 if (msg.equals("Details saved successfuly !")) {
                     modelAndView.addObject("message", msg);

@@ -28,8 +28,9 @@
     </div>
     <div align="center">
         <div th:each="data,num : ${products}"
-            style="border:1px solid black; height: 350px;width: 219px;margin: 10px;display: inline-block; ">
-            <img th:src="@{${'product/image/image'+num.count+'.jpg'}}" width="205px" />
+            style="border:1px solid black; height: autow;width: auto;margin: 10px;display: inline-block; ">
+            <!-- <img th:src="@{${'product/image/image'+num.count+'.jpg'}}" width="205px" /> -->
+            <img th:src="@{${'product/uploadedFile/'+data.productImgId}}" width="205px" />
             <div style="margin-top:30px ;" >
                 <table>
                     <tbody>

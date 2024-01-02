@@ -112,6 +112,7 @@ public class SellerServiceImpl implements SellerServices {
         try {
             productEntity.setPrice(productsBeans.getPrice());
             productEntity.setQuantity(productsBeans.getQuantity());
+            productEntity.setAvailableData(productsBeans.getQuantity());
             productEntity.setProductName(productsBeans.getProductName());
             productEntity.setProductId(productsBeans.getProductId());
             productEntity.setProductType(productsBeans.getProductType());

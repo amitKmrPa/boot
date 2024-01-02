@@ -34,6 +34,7 @@ public class KartServiceImpl implements KartService {
                 if (kartEntities.getProductId() != null && kartEntities.getProductId().equalsIgnoreCase(productId)) {
                     int count = kartEntities.getProductCount()+product_count;
                     kartEntities.setProductCount(count);
+                    productEntities.setAvailableData(productEntities.getAvailableData()-1);
                     Date date = Calendar.getInstance().getTime();
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm hh:mm:ss");
                     String strDate = dateFormat.format(date);
@@ -78,6 +79,7 @@ public class KartServiceImpl implements KartService {
         Kart kart = new Kart();
         int product_count = 1;
         Kart kartData = new Kart();
+        ProductEntity productEntitiesForQuantity = new ProductEntity();
         List<Object> listKart = new ArrayList<>();
         try {
             kart = kartRepo.removeFromKart(productId, sellerId, userId);
@@ -85,6 +87,9 @@ public class KartServiceImpl implements KartService {
                 
                 kart.setProductCount(0);
             } else {
+                productEntitiesForQuantity =productRepo.findProductById(productId);
+                int count = productEntitiesForQuantity.getAvailableData()+1;
+                productEntitiesForQuantity.setAvailableData(count);
                 kart.setProductCount(kart.getProductCount()-product_count);   
             }
             kartRepo.saveAndFlush(kart);
@@ -94,5 +99,4 @@ public class KartServiceImpl implements KartService {
         }
         return listKart;
     }
-
 }
